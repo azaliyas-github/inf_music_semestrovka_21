@@ -1,9 +1,7 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <title>Моя тестовая страница</title>
-    <META HTTP-EQUIV="Content-type" CONTENT="video/mp4:">
+<#include "base/layout.ftlh">
+<#macro title>Моя тестовая страница</#macro>
+
+<#macro head>
     <style>
         .video-container {
             position: relative;
@@ -21,8 +19,9 @@
             outline-width: 0;
         }
     </style>
-</head>
-<body>
+</#macro>
+
+<#macro body>
     <section>
         <div class="video-container">
             <video autoplay muted loop>
@@ -58,5 +57,6 @@
             });
         }).resize();
     </script>
-</body>
-</html>
+</#macro>
+
+<@display_page/>
