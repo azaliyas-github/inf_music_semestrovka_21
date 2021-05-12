@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring>
+<#import "header.ftlh" as header>
 
 <#macro main_lang>ru</#macro>
 <#macro base_html>
@@ -16,12 +17,14 @@
 <#macro base_head>
     <meta charset="UTF-8">
 <@base_title/>
+<@header.links/>
 <@head/>
 </#macro>
 
 <#macro body></#macro>
 
 <#macro base_body>
+<@header.content/>
 <@body/>
 </#macro>
 

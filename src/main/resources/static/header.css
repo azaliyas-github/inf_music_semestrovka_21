@@ -1,0 +1,64 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700italic);
+* { padding: 0; margin: 0; }
+body { background: #f3ecd9; font-family: 'Lato', sans-serif; letter-spacing: 1px;}
+
+header {
+    align-items: initial;
+    height: 1.1em;
+    padding: 1em 5%;
+    background-image: -webkit-gradient(
+            linear, left top, left bottom, from(rgba(0,0,0,0.8)),
+            to(rgba(80,80,80,0.2)), color-stop(.2,#333333)
+    );
+    color: #fff;
+}
+
+header::after {
+    content: '';
+    width: 100%;
+}
+
+nav {
+    transform: translate(40em, -1.2em)
+}
+
+li {
+    display: inline-block;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    font-size: medium;
+    font-weight: lighter;
+}
+
+header > div {
+    height: 100%;
+}
+
+header > div::before {
+    content: '';
+    height: 100%;
+}
+
+header > div h1 {
+    font-size: 3em;
+    font-style: italic;
+}
+
+header nav a {
+    padding: 0 0.6em;
+    white-space: nowrap;
+    color: white;
+}
+
+header nav a:last-child {
+    padding-right: 0;
+}
+
+@media screen and (max-width: 720px){
+    header {
+        flex-direction: column;
+
+        /* Выравнивание элементов шапки с начала (по левому краю). */
+        align-items: flex-start;
+    }
+}
