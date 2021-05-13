@@ -1,21 +1,17 @@
 <#include "base/layout.ftlh">
+
 <#macro title>Моя тестовая страница</#macro>
 
 <#macro body>
     <section>
+        <@spring.bind "sheetForm"/>
         <form id="addForm" method="post" action="/add_sheet" enctype="multipart/form-data">
-            <select required name="instruments" multiple autocomplete="on">
-                <option>Guitar</option>
-                <option>Piano</option>
-                <option>Vocal</option>
-                <option>Violin</option>
-                <option>Drums</option>
-                <option>Music history</option>
-            </select>
-            <input type="text" name="sheetName" placeholder="Title">
-            <input type="text" name="composersName" placeholder="Composer`s name">
-            <p><input type="file" name="pdf"
-                      multiple accept="application/pdf">
+            <@spring.formMultiSelect "sheetForm.instruments", instruments,
+            "required autocomplete='on'"/>
+            <@spring.formInput "sheetForm.name", "id='sheet_name' placeholder='Name' required"/>
+            <@spring.formInput "sheetForm.composer", "id='sheet_composer' required
+             placeholder='Composer name'"/>
+            <p><@spring.formInput "sheetForm.file", "id='file' accept='.pdf'", "file"/>
                 <button type="submit" form="addForm">Добавить</button></p>
         </form>
         <#if sheets??>

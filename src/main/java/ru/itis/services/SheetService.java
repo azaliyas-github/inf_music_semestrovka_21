@@ -26,6 +26,20 @@ public class SheetService {
     @Autowired
     private PdfUtil pdfUtil;
 
+    public void createSheet(SheetForm form) {
+        var preview = pdfUtil.renderPreview(form.getPdf());
+        var instruments = instrumentService.getByName(form.getInstruments());
+        var imageFileName = imageRepository.saveNew(preview, "jpg");
+        var pdfFileName = pdfRepository.saveNew(form.getPdf());
+        sheetRepository.save(Sheet.builder()
+				.title(form.getName())
+                .instruments(instruments)
+                .composerName(form.getComposer())
+                .previewSrc(imageFileName)
+                .src(pdfFileName)
+                .build());
+    }
+
     public List<Sheet> getAllSheets() {
         return sheetRepository.findAll();
     }
