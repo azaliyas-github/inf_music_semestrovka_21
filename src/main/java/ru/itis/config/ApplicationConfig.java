@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.*;
 import org.springframework.web.servlet.config.annotation.*;
 import ru.itis.controllers.interceptors.*;
 
+import java.util.concurrent.*;
+
 @Configuration
 public class ApplicationConfig implements WebMvcConfigurer {
     @Autowired
@@ -17,8 +19,13 @@ public class ApplicationConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder();
     }
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
+    @Bean
+    public ExecutorService executorService() {
+        return Executors.newCachedThreadPool();
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor).addPathPatterns("/*");
-	}
+    }
 }

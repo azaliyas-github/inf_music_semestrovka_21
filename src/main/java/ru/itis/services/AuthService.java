@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
 import ru.itis.dto.*;
+import ru.itis.exceptions.*;
 import ru.itis.model.*;
 import ru.itis.repository.*;
 import ru.itis.utils.*;
@@ -52,5 +53,13 @@ public class AuthService {
 
     public void logIn(LoginForm form) {
 
+    }
+
+    public boolean confirmEmail(String confirmCode) {
+        Optional<User> user = usersRepository.findByConfirmCode(confirmCode);
+        if (user.isEmpty())
+            throw new BusinessException("Wrong confirm code " + confirmCode);
+
+        return true;
     }
 }
