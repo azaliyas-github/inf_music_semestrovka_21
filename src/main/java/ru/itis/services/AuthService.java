@@ -39,7 +39,7 @@ public class AuthService {
                 .name(form.getName())
                 .lastName(form.getLastName())
                 .email(form.getEmail())
-                .hashedPassword(passwordEncoder.encode(form.getPassword()))
+                .hashPassword(passwordEncoder.encode(form.getPassword()))
                 .state(User.State.NOT_CONFIRMED)
                 .role(User.Role.USER)
                 .status(User.Status.ACTIVE)
@@ -49,10 +49,6 @@ public class AuthService {
         usersRepository.save(user);
         String confirmMail = mailsGenerator.getMailForConfirm(serverUrl, user.getConfirmCode());
         emailUtil.sendMail(user.getEmail(), subject, from, confirmMail);
-    }
-
-    public void logIn(LoginForm form) {
-
     }
 
     public boolean confirmEmail(String confirmCode) {

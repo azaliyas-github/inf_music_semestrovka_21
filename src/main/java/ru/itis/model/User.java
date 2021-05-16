@@ -19,7 +19,7 @@ public class User {
     private String name;
     private String lastName;
     private String email;
-    private String hashedPassword;
+    private String hashPassword;
     private String confirmCode;
 
     @Enumerated(value = EnumType.STRING)
@@ -41,5 +41,13 @@ public class User {
 
     public enum Status {
         ACTIVE, BANNED
+    }
+
+    public boolean isActive() {
+        return this.state == State.CONFIRMED && this.status == Status.ACTIVE;
+    }
+
+    public boolean isAdmin() {
+        return this.role == Role.MODERATOR;
     }
 }
