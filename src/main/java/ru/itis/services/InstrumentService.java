@@ -1,5 +1,6 @@
 package ru.itis.services;
 
+import com.querydsl.core.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import ru.itis.model.*;
@@ -15,11 +16,11 @@ public class InstrumentService {
     private InstrumentRepository instrumentRepository;
 
     public List<Instrument> getByName(String[] instrumentNames) {
-        var instrumentNamesSet = Arrays.stream(instrumentNames).collect(Collectors.toSet());
-		var document = new Document();
-        return instrumentRepository.findAll().stream()
-                .filter(instrument -> instrumentNamesSet.contains(instrument.getName()))
-                .collect(Collectors.toList());
+    	if (ArrayUtils.isEmpty(instrumentNames))
+    		return List.of();
+
+        Collection<String> instrumentNamesSet = List.of(instrumentNames);
+        return instrumentRepository.findByNameIn(instrumentNamesSet);
     }
 
     public List<Instrument> getAll() {

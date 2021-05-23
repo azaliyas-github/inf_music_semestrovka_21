@@ -1,5 +1,7 @@
 package ru.itis.services;
 
+import com.querydsl.core.*;
+import org.apache.commons.collections4.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import ru.itis.dto.*;
@@ -44,4 +46,23 @@ public class SheetService {
         return sheetRepository.findAll();
     }
 
+    public List<Sheet> searchSheets(String query, String[] instrumentNames) {
+    	var instruments = instrumentService.getByName(instrumentNames);
+        var queryWords = query.split(" ");
+
+		var matchingSheet = QSheet.sheet;
+		var sheetQuery = new BooleanBuilder();
+		for (var queryWord : queryWords) {
+			var containsQueryWord = new BooleanBuilder()
+				.or(matchingSheet.composerName.contains(queryWord))
+				.or(matchingSheet.title.contains(queryWord));
+			sheetQuery.and(containsQueryWord);
+		}
+		for (var instrument : instruments)
+			sheetQuery.and(matchingSheet.instruments.contains(instrument));
+
+		var foundSheets = sheetRepository.findAll(sheetQuery);
+
+        return IterableUtils.toList(foundSheets);
+    }
 }
