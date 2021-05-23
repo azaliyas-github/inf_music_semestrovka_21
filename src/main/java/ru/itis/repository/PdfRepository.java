@@ -13,6 +13,11 @@ public class PdfRepository {
 
     private final String baseDirectory = "pdf" + File.separator;
 
+    public byte[] getRaw(String fileName) {
+        fileName = baseDirectory + fileName;
+        return fileRepository.get(fileName);
+    }
+
     public Document get(String fileName) {
         fileName = baseDirectory + fileName;
         var file = fileRepository.get(fileName);

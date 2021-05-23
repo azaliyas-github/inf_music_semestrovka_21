@@ -10,9 +10,6 @@ import ru.itis.model.*;
 import ru.itis.services.*;
 import ru.itis.utils.*;
 
-import java.util.*;
-import java.util.stream.*;
-
 @Controller
 public class SheetController {
 
@@ -24,7 +21,7 @@ public class SheetController {
 
     @GetMapping("/sheet")
     public String getSheetsPage(Model model) {
-        model.addAttribute("sheets", new ArrayList<Sheet>());
+        model.addAttribute("sheets", sheetService.getAllSheets());
         var instruments = instrumentService.getAll().stream()
                 .map(Instrument::getName)
 				.sorted()
