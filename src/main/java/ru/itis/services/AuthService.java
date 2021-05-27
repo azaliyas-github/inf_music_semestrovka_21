@@ -1,7 +1,11 @@
 package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.context.*;
 import org.springframework.security.crypto.password.*;
+import org.springframework.security.web.authentication.*;
+import org.springframework.security.web.context.*;
 import org.springframework.stereotype.*;
 import ru.itis.dto.*;
 import ru.itis.exceptions.*;
@@ -13,6 +17,9 @@ import java.util.*;
 
 @Service
 public class AuthService {
+    @Autowired
+    private ProfileRepository profileRepository;
+
     @Autowired
     private EmailUtil emailUtil;
 
@@ -56,6 +63,9 @@ public class AuthService {
         if (user.isEmpty())
             throw new BusinessException("Wrong confirm code " + confirmCode);
 
+        profileRepository.save(Profile.builder()
+                .userId(user.get().getId())
+                .build());
         return true;
     }
 }

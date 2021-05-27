@@ -1,0 +1,94 @@
+#profile_header {
+    padding: 150px 0;
+    padding-top: 80px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    opacity: 100%;
+
+}
+.inner_profile_header {
+    height: 9vw;
+    background-color: #ffffff;
+    margin-bottom: -30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+#outer_img_shell {
+    padding-top: 1.5vw;
+}
+.image-cropper {
+    float: left;
+    width: 5vw;
+    height: 5vw;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: 1.5vw;
+}
+#profile_image {
+    display: inline-block;
+    margin: 0 auto;
+    width: auto;
+ }
+#name_and_lastName {
+    display: inline-block;
+    color: slategray;
+    max-font-size: 24pt;
+    font-size: 21pt;
+    font-family: "MS Reference Sans Serif";
+    margin-left: 1.5vw;
+    font-weight: normal;
+}
+#just_some_part {
+    background-color: #474747;
+}
+
+#personal_inf_outer_block {
+    background-color: white;
+    width: 20vw;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+#personal_inf_inner_block {
+    height: 3vw;
+}
+#personal_inf_inner_block p{
+    margin-left: 1vw;
+}
+.personal_inf_block_border {
+    border-color: silver;
+    border-style: solid;
+    border-width: thin;
+}
+#p_i_str {
+    color: #3f5c80;
+    max-font-size: 13pt;
+    font-size: 11pt;
+    font-family: "MS Reference Sans Serif";
+    font-weight: bold;
+}
+.personal_inf_block_border i{
+    margin-right: 1vw;
+}
+.personal_inf_block_style {
+    height: 4vw;
+}
+.personal_inf_block_style p{
+    margin-left: 1vw;
+    display: inline-block;
+}
+.thin_font {
+    color: slategray;
+    max-font-size: 12pt;
+    font-size: 10pt;
+    font-family: "MS Reference Sans Serif";
+    font-weight: lighter;
+    float: left;
+}
+.thick_font {
+    color: #3f5c80;
+    max-font-size: 12pt;
+    font-size: 10pt;
+    font-family: "MS Reference Sans Serif";
+    font-weight: bolder;
+    transform: translate3d(-3.1vw, 1.2vw, 0);
+}
