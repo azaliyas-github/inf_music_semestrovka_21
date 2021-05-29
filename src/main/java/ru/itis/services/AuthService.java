@@ -54,7 +54,8 @@ public class AuthService {
                 .build();
 
         usersRepository.save(user);
-        String confirmMail = mailsGenerator.getMailForConfirm(serverUrl, user.getConfirmCode());
+        String confirmMail = mailsGenerator.getMailForConfirm(serverUrl,
+                user.getConfirmCode(), form.getName(), user.getId());
         emailUtil.sendMail(user.getEmail(), subject, from, confirmMail);
     }
 

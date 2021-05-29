@@ -13,15 +13,17 @@ public class FreemarkerMailsGeneratorImpl implements MailsGenerator {
     private Configuration configuration;
 
     @Override
-    public String getMailForConfirm(String serverUrl, String code) {
+    public String getMailForConfirm(String serverUrl, String code, String username, Long userId) {
         Template confirmMailTemplate;
         try {
-            confirmMailTemplate = configuration.getTemplate("confirm_mail.ftlh");
+            confirmMailTemplate = configuration.getTemplate("mails/confirm-email.ftlh");
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
         // подготовили данные для шаблона
         Map<String, String> attributes = new HashMap<>();
+        attributes.put("user_id", userId.toString());
+        attributes.put("username", username);
         attributes.put("confirm_code", code);
         attributes.put("server_url", serverUrl);
 
