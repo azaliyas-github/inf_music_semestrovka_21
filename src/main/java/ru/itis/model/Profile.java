@@ -16,7 +16,7 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ColumnDefault("default_photo.jpg")
-    private String photoFileName;
+    @Builder.Default
+    private String photoFileName = "default_photo.jpg";
     private Long userId;
 }
