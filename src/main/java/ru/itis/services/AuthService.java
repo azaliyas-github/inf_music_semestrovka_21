@@ -54,18 +54,27 @@ public class AuthService {
                 .build();
 
         usersRepository.save(user);
-        String confirmMail = mailsGenerator.getMailForConfirm(serverUrl, user.getConfirmCode());
+        String confirmMail = mailsGenerator.getMailForConfirm(serverUrl,
+                user.getConfirmCode(), form.getName(), user.getId());
         emailUtil.sendMail(user.getEmail(), subject, from, confirmMail);
     }
 
-    public boolean confirmEmail(String confirmCode) {
-        Optional<User> user = usersRepository.findByConfirmCode(confirmCode);
-        if (user.isEmpty())
-            throw new BusinessException("Wrong confirm code " + confirmCode);
+    public void confirmEmail(Long userId, String confirmCode) {
+        Optional<User> userResult = usersRepository.findById(userId);
+        if (userResult.isEmpty())
+            throw new BusinessException("Can't find user with id " + userId);
 
+        var user = userResult.get();
+        if (!user.getConfirmCode().equals(confirmCode))
+        	throw new BusinessException("Received wrong confirm code " + confirmCode
+				+ " from user with id " + userId);
+        if (user.getState() == User.State.CONFIRMED)
+        	return;
+
+        user.setState(User.State.CONFIRMED);
+        usersRepository.save(user);
         profileRepository.save(Profile.builder()
-                .userId(user.get().getId())
+                .userId(userId)
                 .build());
-        return true;
     }
 }

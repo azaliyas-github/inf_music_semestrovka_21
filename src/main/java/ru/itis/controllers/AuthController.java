@@ -1,20 +1,25 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.ui.*;
-import org.springframework.validation.*;
+import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
-import ru.itis.dto.*;
+import ru.itis.exceptions.*;
 import ru.itis.services.*;
 
-@RestController
+@Controller
 public class AuthController {
     @Autowired
-    public AuthService authService;
+    private AuthService authService;
 
-    @PostMapping("/signup")
-    public void signUp(@RequestBody RegistrationForm form, BindingResult bindingResult, Model model) {
-        if (!bindingResult.hasErrors())
-            authService.signUp(form);
+    @GetMapping("/users/{user-id}/confirm/{confirm-code}")
+    public String confirmEmail(
+        @PathVariable("user-id") Long userId,
+        @PathVariable("confirm-code") String confirmCode) {
+        try {
+            authService.confirmEmail(userId, confirmCode);
+        } catch (BusinessException e) {
+        	return "error";
+        }
+        return "confirm";
     }
 }
