@@ -1,10 +1,10 @@
 <#macro content sheets>
     <#if sheets??>
         <#list sheets as sheet>
-            <a href="/pdf/${sheet.src}" download="" class="product box
+            <a href="/api/pdf/${sheet.src}" download="" class="product box
                             main_flex__nowrap flex_jcontent_center flex_align_items_center">
                 <div class="img_product">
-                    <img src="/images/${sheet.previewSrc}" />
+                    <img src="/api/images/${sheet.previewSrc}" />
                 </div>
                 <h2 class="sheetName">${sheet.title}</h2>
                 <p class="sheetAuthor">${sheet.composerName}</p>

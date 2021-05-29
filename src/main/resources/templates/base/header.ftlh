@@ -1,21 +1,21 @@
+<#import "common.ftlh" as common>
+<#import "menu.ftlh" as menu>
+
 <#macro links>
-    <link rel="stylesheet" href="header.css">
+    <link href="/layout/styles/header.css" rel="stylesheet" type="text/css" media="all">
 </#macro>
 
-<#macro content>
-    <header class="header">
-        <div class="inner_div">
-            <div><a href="/main"><img src=""></a></div>
-            <nav>
-                <ul>
-                    <li><a id="Courses" href="/courses">Курсы</a></li>
-                    <li><a id="tutors">Преподаватели</a></li>
-                    <li><a id="events">Мероприятия</a></li>
-                    <li><a id="price">Цены</a></li>
-                    <li><a id="contact_info">Контакты</a></li>
-                    <li><a  href="#" class="js-show-modal" id="profile">Профиль</a></li>
-                </ul>
-            </nav>
+<#macro content title custom_header>
+    <div class="bgded overlay" style="background-image:url('/images/backgrounds/01.png');">
+        <div class="wrapper row1">
+        <@menu.content/>
         </div>
-    </header>
+        <#if common.notEmptyMacro(custom_header)>
+    <@custom_header/>
+        <#else>
+        <div id="breadcrumb" class="hoc clear">
+            <h6 class="heading"><@title/></h6>
+        </div>
+        </#if>
+    </div>
 </#macro>

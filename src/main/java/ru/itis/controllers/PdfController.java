@@ -8,7 +8,7 @@ import ru.itis.repository.*;
 import ru.itis.utils.*;
 
 @Controller
-@RequestMapping("pdf/")
+@RequestMapping("api/pdf/")
 public class PdfController {
     @Autowired
     private PdfRepository repository;

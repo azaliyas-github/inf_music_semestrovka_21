@@ -9,7 +9,7 @@ import ru.itis.repository.*;
 import ru.itis.utils.*;
 
 @Controller
-@RequestMapping("images/")
+@RequestMapping("api/images/")
 public class ImageController {
     @Autowired
     private ImageRepository repository;
