@@ -26,7 +26,7 @@ public class SheetController {
     @Autowired
     private Configuration configuration;
 
-    @GetMapping("/sheet")
+    @GetMapping("/sheets")
     public String getSheetsPage(Model model) {
         model.addAttribute("sheets", sheetService.getAllSheets());
         var instruments = instrumentService.getAll().stream()
@@ -36,7 +36,7 @@ public class SheetController {
         model.addAttribute("instruments", instruments);
 
 		model.addAttribute("sheetForm", new SheetForm());
-        return "sheet";
+        return "sheets";
     }
 
     @PostMapping("/add_sheet")
@@ -44,13 +44,13 @@ public class SheetController {
                             BindingResult bindingResult, Model model) {
         if (!bindingResult.hasErrors()) {
             sheetService.createSheet(sheetForm);
-            return "redirect:/sheet";
+            return "redirect:/sheets";
         }
 
-        return "redirect:/sheet";
+        return "redirect:/sheets";
     }
 
-    @GetMapping(value = "/sheet/search", produces = "application/xml")
+    @GetMapping(value = "/sheets/search", produces = "application/xml")
     public @ResponseBody String searchSheets(String query, String[] instruments) {
         Template sheetsTemplate;
         try {
