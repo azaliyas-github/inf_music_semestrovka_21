@@ -13,16 +13,6 @@
 .row5, .row5 a{}
 
 
-/* Header
---------------------------------------------------------------------------------------------------------------- */
-#header{padding:0 15px; border:solid; border-width:1px 0;}
-
-#header #logo{margin:10px 0 0 0;}
-#header #logo h1{margin:0; padding:0; line-height:0; text-transform:uppercase;}
-#upper_logo_part{font-size:15px;}
-#lower_logo_part{font-size:22.5px; margin-bottom: 2px}
-
-
 /* Page Intro
 --------------------------------------------------------------------------------------------------------------- */
 #pageintro{padding:180px 0;}
@@ -137,37 +127,6 @@
 .cta > :last-child{margin-bottom:0;}/* Used when elements stack in smaller viewports */
 .cta footer{text-align:center;}
 .cta footer a{display:block;}
-
-
-/* Footer
---------------------------------------------------------------------------------------------------------------- */
-#footer{padding:80px 0;}
-
-#footer .heading{margin-bottom:50px; font-size:1.2rem;}
-
-#footer .linklist li{display:block; margin-bottom:15px; padding:0 0 15px 0; border-bottom:1px solid;}
-#footer .linklist li:last-child{margin:0; padding:0; border:none;}
-#footer .linklist li::before, #footer .linklist li::after{display:table; content:"";}
-#footer .linklist li, #footer .linklist li::after{clear:both;}
-
-#footer input, #footer button{border:1px solid;}
-#footer input{display:block; width:100%; padding:8px;}
-#footer button{padding:8px 18px 10px; text-transform:uppercase; font-weight:400; cursor:pointer;}
-
-#footer .latestimg{}
-#footer .latestimg > li{display:inline-block; float:left; width:30%; margin:0 0 5% 5%;}
-#footer .latestimg > li:nth-last-child(-n+3){margin-bottom:0;}/* Removes bottom margin from the last three items - margin is restored in the media queries when items stack */
-#footer .latestimg > li:nth-child(3n+1){margin-left:0; clear:left;}/* Removes the need to add class="first" */
-#footer .latestimg > li img{width:100%;}/* Force the image to resize to take the full space - may have to be changed for tablets, depends on personal preference */
-#footer .latestimg > li a.imgover{display:block;}
-
-#footer #ctdetails{padding-top:80px; border-top:1px solid;}
-#footer #ctdetails ul{}
-#footer #ctdetails ul li{}
-#footer #ctdetails ul li div{position:relative; min-height:30px; padding:0 0 0 35px; line-height:1;}
-#footer #ctdetails ul li div i{position:absolute; top:0; left:0; width:25px; height:23px; font-size:20px; text-align:center;}
-#footer #ctdetails ul li div span{display:block;}
-#footer #ctdetails ul li div strong{display:block; margin:0 0 8px 0; text-transform:capitalize;}
 
 
 /* Copyright
@@ -327,8 +286,6 @@ input:focus, textarea:focus, *:required:focus{border-color:#829DA2;}
 
 
 /* Header */
-#header{border-color:rgba(255,255,255,.2);}
-#header #logo h1 a{color:inherit;}
 
 
 /* Page Intro */
@@ -344,17 +301,6 @@ input:focus, textarea:focus, *:required:focus{border-color:#829DA2;}
 
 /* Latest */
 #latest article .excerpt time{border-color:#D7D7D7;}
-
-
-/* Footer */
-#footer .heading{color:#FFFFFF;}
-#footer hr, #footer .borderedbox, #footer .linklist li, #footer #ctdetails{border-color:rgba(255,255,255,.1);}
-
-#footer input, #footer button{border-color:transparent;}
-#footer input{color:#FFFFFF; background-color:#829DA2;}
-#footer input:focus{border-color:#DBE5E7;}
-#footer button{color:#474747; background-color:#DBE5E7;}
-#footer button:hover{color:inherit; background-color:transparent; border-color:inherit;}
 
 
 /* Navigation */
@@ -414,9 +360,6 @@ table a, #comments a{background-color:inherit;}
 @media screen and (max-width:978px){
 	.hoc{max-width:90%;}
 
-	#header{padding:30px 15px;}
-	#header #logo{margin-top:3px;}
-
 	#mainav{}
 	#mainav ul{display:none;}
 	#mainav form{display:block;}
@@ -427,8 +370,6 @@ table a, #comments a{background-color:inherit;}
 	#comments input[type="reset"]{margin-top:10px;}
 	.pagination li{display:inline-block; margin:0 5px 5px 0;}
 
-	#footer{}
-
 	#copyright{}
 	#copyright p:first-of-type{margin-bottom:10px;}
 }
@@ -438,9 +379,6 @@ table a, #comments a{background-color:inherit;}
 	.fl_left, .fl_right{display:block; float:none;}
 	.group .group > *:last-child, .clear .clear > *:last-child, .clear .group > *:last-child, .group .clear > *:last-child{margin-bottom:0;}/* Experimental - Needs more testing in different situations, stops double margin when stacking */
 	.one_half, .one_third, .two_third, .one_quarter, .two_quarter, .three_quarter{display:block; float:none; width:auto; margin:0 0 30px 0; padding:0;}
-
-	#header{padding:30px 0; text-align:center;}
-	#header #logo{margin:0 0 20px 0;}
 
 	#pageintro article, #pageintro p{max-width:none; margin:auto;}
 	#pageintro .heading{font-size:2rem;}
@@ -457,10 +395,6 @@ table a, #comments a{background-color:inherit;}
 
 	.cta > :first-child{margin-top:0; text-align:center;}
 	.cta footer a{display:inline-block;}
-
-	#footer{padding-bottom:50px;}/* Not required, just looks a little better */
-	#footer .latestimg > li{display:inline-block; float:none; width:auto; margin:0 5% 5% 0;}
-	#footer .latestimg > li img{width:auto;}
 }
 
 @media screen and (max-width:450px){
