@@ -1,5 +1,6 @@
 package ru.itis.controllers;
 
+import freemarker.template.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -10,6 +11,9 @@ import ru.itis.model.*;
 import ru.itis.services.*;
 import ru.itis.utils.*;
 
+import java.io.*;
+import java.util.*;
+
 @Controller
 public class SheetController {
 
@@ -18,6 +22,9 @@ public class SheetController {
 
     @Autowired
     InstrumentService instrumentService;
+
+    @Autowired
+    private Configuration configuration;
 
     @GetMapping("/sheet")
     public String getSheetsPage(Model model) {
@@ -43,4 +50,26 @@ public class SheetController {
         return "redirect:/sheet";
     }
 
+    @GetMapping(value = "/sheet/search", produces = "application/xml")
+    public @ResponseBody String searchSheets(String query, String[] instruments) {
+        Template sheetsTemplate;
+        try {
+            sheetsTemplate = configuration.getTemplate("sheet-list.ftlh");
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+
+        List<Sheet> sheets = sheetService.searchSheets(query, instruments);
+
+        var attributes = new HashMap<String, Object>();
+        attributes.put("sheets", sheets);
+        StringWriter writer = new StringWriter();
+        try {
+            sheetsTemplate.process(attributes, writer);
+        } catch (TemplateException | IOException e) {
+            throw new IllegalStateException(e);
+        }
+
+        return writer.toString();
+    }
 }
