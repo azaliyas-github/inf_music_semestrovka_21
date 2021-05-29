@@ -73,7 +73,7 @@
           <div id="outer_img_shell"></div>
           <div class="image-cropper">
               <#if profile??>
-                  <img id="profile_image" src="/images/${profile.photoFileName}" >
+                  <img id="profile_image" src="/api/images/${profile.photoFileName}" >
               </#if>
           </div>
         <p id="name_and_lastName">${user.name} ${user.lastName}</p>
