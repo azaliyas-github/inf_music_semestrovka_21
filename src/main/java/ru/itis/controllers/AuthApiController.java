@@ -8,9 +8,9 @@ import ru.itis.dto.*;
 import ru.itis.services.*;
 
 @RestController
-public class AuthController {
+public class AuthApiController {
     @Autowired
-    public AuthService authService;
+    private AuthService authService;
 
     @PostMapping("/signup")
     public void signUp(@RequestBody RegistrationForm form, BindingResult bindingResult, Model model) {
