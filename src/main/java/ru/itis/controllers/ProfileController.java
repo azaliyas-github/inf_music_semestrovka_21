@@ -12,7 +12,6 @@ import java.util.*;
 
 @Controller
 public class ProfileController {
-    //тестовый вариант
     @Autowired
     private UserRepository userRepository;
 
@@ -23,14 +22,12 @@ public class ProfileController {
     @GetMapping("/profile")
     public String getProfilePage(Model model) {
         Optional<User> user = userRepository.findByEmail("a@a.a");
-        if (profileRepository.findByUserId(user.get().getId()).isEmpty()) {
-            profileRepository.save(Profile.builder()
-                    .userId(user.get().getId())
-                    .build());
-        }
-        Optional<Profile> profile = profileRepository.findByUserId(user.get().getId());
-        model.addAttribute("profile", profile.orElse(null));
-        model.addAttribute("user", user.orElse(null));
+        if (user.isPresent()) {
+			  Optional<Profile> profile = profileRepository.findByUserId(user.get().getId());
+			  model.addAttribute("profile", profile.orElse(null));
+			  model.addAttribute("user", user.orElse(null));
+		  }
+
         return "profile";
     }
 }
