@@ -14,13 +14,14 @@ public class AuthController {
 
     @GetMapping("{user-id}/confirm/{confirm-code}")
     public String confirmEmail(
-        @PathVariable("user-id") Long userId,
-        @PathVariable("confirm-code") String confirmCode) {
+            @PathVariable("user-id") Long userId,
+            @PathVariable("confirm-code") String confirmCode) {
         try {
             authService.confirmEmail(userId, confirmCode);
         } catch (BusinessException e) {
         	return "error";
         }
-        return "confirm";
+
+        return "email-confirmed";
     }
 }
