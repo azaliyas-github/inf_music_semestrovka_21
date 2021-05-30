@@ -19,6 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="/layout/styles/base/layout.css" rel="stylesheet" type="text/css" media="all">
 <@base_title/>
+<@base_scripts/>
 <@header.links/>
 <@footer.links/>
 <@head/>
@@ -51,7 +52,6 @@
 </head>
 <body id="top">
     <@base_body/>
-    <@base_scripts/>
 </body>
 </html>
 </#macro>
