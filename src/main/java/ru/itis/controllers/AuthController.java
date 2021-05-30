@@ -19,9 +19,15 @@ public class AuthController {
         try {
             authService.confirmEmail(userId, confirmCode);
         } catch (BusinessException e) {
-        	return "error";
+            return "email-confirmation-error";
         }
 
+        return "email-confirmed";
+    }
+
+    @GetMapping("{user-id}/resend-mail")
+    public String resendConfirmationMail(@PathVariable("user-id") Long userId) {
+        authService.resendConfirmationMail(userId);
         return "email-confirmed";
     }
 }
