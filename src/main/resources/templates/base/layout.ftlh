@@ -1,5 +1,6 @@
 <#import "/spring.ftl" as spring>
 <#import "header.ftlh" as header>
+<#import "main.ftlh" as main>
 <#import "footer.ftlh" as footer>
 
 <#macro main_lang>ru</#macro>
@@ -24,21 +25,11 @@
 </#macro>
 
 <#macro custom_header></#macro>
+<#macro custom_main></#macro>
 <#macro body></#macro>
 <#macro base_body>
 <@header.content title custom_header/>
-<#if custom_main??>
-<@custom_main/>
-<#else>
-<div class="wrapper row3">
-    <main class="hoc container clear">
-        <div class="content">
-        <@body/>
-        </div>
-        <div class="clear"></div>
-    </main>
-</div>
-</#if>
+<@main.content body custom_main/>
 <@footer.content/>
 <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
 </#macro>
