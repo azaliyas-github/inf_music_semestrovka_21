@@ -1,11 +1,7 @@
 package ru.itis.services;
 
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.authentication.*;
-import org.springframework.security.core.context.*;
 import org.springframework.security.crypto.password.*;
-import org.springframework.security.web.authentication.*;
-import org.springframework.security.web.context.*;
 import org.springframework.stereotype.*;
 import ru.itis.dto.*;
 import ru.itis.exceptions.*;
@@ -54,9 +50,7 @@ public class AuthService {
                 .build();
 
         usersRepository.save(user);
-        String confirmMail = mailsGenerator.getMailForConfirm(serverUrl,
-                user.getConfirmCode(), form.getName(), user.getId());
-        emailUtil.sendMail(user.getEmail(), subject, from, confirmMail);
+        sendConfirmMailTo(user);
     }
 
     public void confirmEmail(Long userId, String confirmCode) {
@@ -76,5 +70,20 @@ public class AuthService {
         profileRepository.save(Profile.builder()
                 .userId(userId)
                 .build());
+    }
+
+    public void resendConfirmMail(Long userId) {
+        Optional<User> user = usersRepository.findById(userId);
+        user.get().setConfirmCode(UUID.randomUUID().toString());
+        usersRepository.save(user.get());
+
+        sendConfirmMailTo(user.get());
+    }
+
+    private void sendConfirmMailTo(User user) {
+        String confirmMail = mailsGenerator.getMailForConfirm(serverUrl,
+                user.getConfirmCode(), user.getName(), user.getId());
+
+        emailUtil.sendMail(user.getEmail(), subject, from, confirmMail);
     }
 }

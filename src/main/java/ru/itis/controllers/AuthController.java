@@ -26,8 +26,8 @@ public class AuthController {
     }
 
     @GetMapping("{user-id}/resend-mail")
-    public String resendConfirmationMail(@PathVariable("user-id") Long userId) {
-        authService.resendConfirmationMail(userId);
-        return "email-confirmed";
+    public String resendConfirmMail(@PathVariable("user-id") Long userId) {
+        authService.resendConfirmMail(userId);
+        return "mail-resend";
     }
 }

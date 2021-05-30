@@ -6,8 +6,8 @@
 </#macro>
 
 <#macro body>
-    <h3 id="great" class="c-r-f">Great!</h3>
-    <p id="reg" class="c-r-f">Your registration is done.</p>
+    <h3 id="great" class="c-r-f">Succeeded!</h3>
+    <p id="reg" class="c-r-f">Check your email for an update.</p>
 </#macro>
 
 <@display_page/>
