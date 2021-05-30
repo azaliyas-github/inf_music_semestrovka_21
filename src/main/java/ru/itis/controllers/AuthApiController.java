@@ -8,6 +8,7 @@ import ru.itis.dto.*;
 import ru.itis.services.*;
 
 @RestController
+@RequestMapping("api/auth")
 public class AuthApiController {
     @Autowired
     private AuthService authService;

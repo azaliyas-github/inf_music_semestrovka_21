@@ -7,11 +7,12 @@ import ru.itis.exceptions.*;
 import ru.itis.services.*;
 
 @Controller
+@RequestMapping("auth")
 public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @GetMapping("/users/{user-id}/confirm/{confirm-code}")
+    @GetMapping("{user-id}/confirm/{confirm-code}")
     public String confirmEmail(
         @PathVariable("user-id") Long userId,
         @PathVariable("confirm-code") String confirmCode) {
