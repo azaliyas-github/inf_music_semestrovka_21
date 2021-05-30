@@ -4,6 +4,7 @@
 
 <#macro head>
     <link href="/layout/styles/sheets.css" rel="stylesheet" type="text/css">
+    <script src="/layout/scripts/sheets.js"></script>
 </#macro>
 
 <#macro body>
@@ -25,7 +26,7 @@
         </div>
     </section>
     <section>
-        <form id="search-form" action="/sheet/search">
+        <form id="search-form" method="get" action="/sheets/search">
             <select multiple name="instruments">
                 <#list instruments as instrument, _>
                     <option>${instrument}</option>
