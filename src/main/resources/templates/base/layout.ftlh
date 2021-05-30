@@ -17,7 +17,7 @@
 <#macro base_head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="/layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/layout/styles/base/layout.css" rel="stylesheet" type="text/css" media="all">
 <@base_title/>
 <@header.links/>
 <@footer.links/>
@@ -36,9 +36,9 @@
 
 <#macro scripts></#macro>
 <#macro base_scripts>
-<script src="/layout/scripts/jquery.min.js"></script>
-<script src="/layout/scripts/jquery.backtotop.js"></script>
-<script src="/layout/scripts/jquery.mobilemenu.js"></script>
+<script src="/layout/scripts/base/jquery.min.js"></script>
+<script src="/layout/scripts/base/jquery.backtotop.js"></script>
+<script src="/layout/scripts/base/jquery.mobilemenu.js"></script>
 <@scripts/>
 </#macro>
 

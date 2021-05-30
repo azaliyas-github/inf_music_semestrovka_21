@@ -2,7 +2,7 @@
 <#import "menu.ftlh" as menu>
 
 <#macro links>
-    <link href="/layout/styles/header.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/layout/styles/base/header.css" rel="stylesheet" type="text/css" media="all">
 </#macro>
 
 <#macro content title custom_header>

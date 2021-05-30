@@ -1,5 +1,5 @@
 <#macro links>
-    <link href="/layout/styles/footer.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/layout/styles/base/footer.css" rel="stylesheet" type="text/css" media="all">
 </#macro>
 
 <#macro content>

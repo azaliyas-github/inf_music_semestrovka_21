@@ -2,7 +2,7 @@
 <#macro title>Confirmation error</#macro>
 
 <#macro head>
-    <link rel="stylesheet" href="/layout/styles/email-confirmation-error.css">
+    <link href="/layout/styles/email-confirmation-error.css" rel="stylesheet" type="text/css">
 </#macro>
 
 <#macro body>
