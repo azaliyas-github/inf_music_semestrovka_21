@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-    <a href="${server_url}/users/${user_id}/confirm/${confirm_code}">
+    <a href="${server_url}/auth/${user_id}/confirm/${confirm_code}">
         <div id="layer-2">
             <div id="img" >
                 <div id="title">
