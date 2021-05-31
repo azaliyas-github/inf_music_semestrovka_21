@@ -36,8 +36,8 @@
 
 <#macro scripts></#macro>
 <#macro base_scripts>
-<script src="/layout/scripts/base/jquery.min.js"></script>
-<script src="/layout/scripts/base/jquery.mobilemenu.js"></script>
+<script src="/layout/scripts/base/jquery-3.6.0.min.js"></script>
+<script src="/layout/scripts/base/mobilemenu.min.js"></script>
 <@scripts/>
 </#macro>
 
