@@ -3,6 +3,7 @@
 <#import "main.ftlh" as main>
 <#import "footer.ftlh" as footer>
 <#import "auth-section.ftlh" as auth_section>
+<#import "modal-window.ftlh" as modal_window>
 
 <#macro main_lang>ru</#macro>
 <#macro base_html>
@@ -24,6 +25,7 @@
 <@header.links/>
 <@footer.links/>
 <@auth_section.links/>
+<@modal_window.links/>
 <@head/>
 </#macro>
 
@@ -35,6 +37,7 @@
 <@main.content body custom_main/>
 <@footer.content/>
 <@auth_section.content/>
+<@modal_window.content/>
 </#macro>
 
 <#macro scripts></#macro>
