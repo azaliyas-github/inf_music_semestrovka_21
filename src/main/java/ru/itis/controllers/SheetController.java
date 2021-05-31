@@ -16,7 +16,6 @@ import java.util.*;
 
 @Controller
 public class SheetController {
-
     @Autowired
     public SheetService sheetService;
 
@@ -48,28 +47,5 @@ public class SheetController {
         }
 
         return "redirect:/sheets";
-    }
-
-    @GetMapping(value = "/sheets/search", produces = "application/xml")
-    public @ResponseBody String searchSheets(String query, String[] instruments) {
-        Template sheetsTemplate;
-        try {
-            sheetsTemplate = configuration.getTemplate("sheet-list.ftlh");
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
-
-        List<Sheet> sheets = sheetService.searchSheets(query, instruments);
-
-        var attributes = new HashMap<String, Object>();
-        attributes.put("sheets", sheets);
-        StringWriter writer = new StringWriter();
-        try {
-            sheetsTemplate.process(attributes, writer);
-        } catch (TemplateException | IOException e) {
-            throw new IllegalStateException(e);
-        }
-
-        return writer.toString();
     }
 }
