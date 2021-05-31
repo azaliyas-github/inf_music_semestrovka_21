@@ -2,6 +2,7 @@
 <#import "header.ftlh" as header>
 <#import "main.ftlh" as main>
 <#import "footer.ftlh" as footer>
+<#import "auth-section.ftlh" as auth_section>
 
 <#macro main_lang>ru</#macro>
 <#macro base_html>
@@ -22,6 +23,7 @@
 <@base_scripts/>
 <@header.links/>
 <@footer.links/>
+<@auth_section.links/>
 <@head/>
 </#macro>
 
@@ -32,6 +34,7 @@
 <@header.content title custom_header/>
 <@main.content body custom_main/>
 <@footer.content/>
+<@auth_section.content/>
 </#macro>
 
 <#macro scripts></#macro>
