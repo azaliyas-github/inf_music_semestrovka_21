@@ -1,23 +1,28 @@
 <#macro content sheets>
     <#if sheets??>
         <#list sheets as sheet>
-            <a href="/api/pdf/${sheet.src}" download="" class="product box
-                            main_flex__nowrap flex_jcontent_center flex_align_items_center">
-                <div class="img_product">
-                    <img src="/api/images/${sheet.previewSrc}" />
-                </div>
-                <h2 class="sheetName">${sheet.title}</h2>
-                <p class="sheetAuthor">${sheet.composerName}</p>
-                <#if sheet.instruments??>
-                    <p class="instruments_list">
-                        ${sheet.instruments
-                        ?map(x -> x.getName())
-                        ?join(", ")
-                        ?left_pad(20)[0..*20]
-                        ?ensure_ends_with("…")}
-                    </p>
-                </#if>
-            </a>
+            <div class="inner-shell">
+                <a href="/api/pdf/${sheet.src}" download="">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="/api/images/${sheet.previewSrc}" />
+                        </div>
+                        <div class="product-info">
+                            <h5 class="sheetName">${sheet.title}</h5>
+                            <h6 class="sheetAuthor">${sheet.composerName}</h6>
+                            <#if sheet.instruments??>
+                                <p class="instruments_list">
+                                    ${sheet.instruments
+                                    ?map(x -> x.getName())
+                                    ?join(", ")
+                                    ?left_pad(20)[0..*20]
+                                    ?ensure_ends_with("…")}
+                                </p>
+                            </#if>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </#list>
     </#if>
 </#macro>
