@@ -32,7 +32,6 @@
 <@header.content title custom_header/>
 <@main.content body custom_main/>
 <@footer.content/>
-<a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
 </#macro>
 
 <#macro scripts></#macro>

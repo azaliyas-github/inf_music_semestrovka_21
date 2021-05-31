@@ -68,4 +68,5 @@
             </p>
         </div>
     </div>
+    <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
 </#macro>
