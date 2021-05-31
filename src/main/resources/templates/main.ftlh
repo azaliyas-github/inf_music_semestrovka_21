@@ -1,6 +1,10 @@
 <#include "base/layout.ftlh">
 <#macro base_title><title>Conservatorio di Musica Vincenzo Bellini</title></#macro>
 
+<#macro head>
+    <link href="/layout/styles/main.css" rel="stylesheet" type="text/css">
+</#macro>
+
 <#macro custom_header>
     <div id="pageintro" class="hoc clear">
         <article>

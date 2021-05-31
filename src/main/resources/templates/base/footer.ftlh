@@ -1,5 +1,6 @@
 <#macro links>
     <link href="/layout/styles/base/footer.css" rel="stylesheet" type="text/css" media="all">
+    <script src="/layout/scripts/base/jquery.backtotop.js"></script>
 </#macro>
 
 <#macro content>

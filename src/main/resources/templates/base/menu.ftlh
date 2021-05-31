@@ -1,3 +1,7 @@
+<#macro links>
+    <link href="/layout/styles/base/menu.css" rel="stylesheet" type="text/css" media="all">
+</#macro>
+
 <#macro content>
     <header id="header" class="hoc clear">
         <div id="logo" class="fl_left">

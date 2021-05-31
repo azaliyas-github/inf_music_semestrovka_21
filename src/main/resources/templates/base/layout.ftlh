@@ -37,7 +37,6 @@
 <#macro scripts></#macro>
 <#macro base_scripts>
 <script src="/layout/scripts/base/jquery.min.js"></script>
-<script src="/layout/scripts/base/jquery.backtotop.js"></script>
 <script src="/layout/scripts/base/jquery.mobilemenu.js"></script>
 <@scripts/>
 </#macro>
