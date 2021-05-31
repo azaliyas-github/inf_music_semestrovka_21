@@ -18,3 +18,9 @@
 	background-color: #000000A0;
 	display: none;
 }
+
+.modal-window-opened {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+}
