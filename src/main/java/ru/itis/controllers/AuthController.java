@@ -1,8 +1,12 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
 import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
+import ru.itis.dto.*;
 import ru.itis.exceptions.*;
 import ru.itis.services.*;
 
@@ -11,6 +15,15 @@ import ru.itis.services.*;
 public class AuthController {
     @Autowired
     private AuthService authService;
+
+	@PostMapping(value = "/signup")
+	public String signUp(RegistrationForm form, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors())
+			return "redirect:/signup";
+
+		authService.signUp(form);
+		return "redirect:/";
+	}
 
     @GetMapping("{user-id}/confirm/{confirm-code}")
     public String confirmEmail(

@@ -13,7 +13,5 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (modelAndView == null)
             return;
 
-        modelAndView.getModelMap().addAttribute("registrationForm", new RegistrationForm());
-        modelAndView.getModelMap().addAttribute("loginForm", new LoginForm());
     }
 }

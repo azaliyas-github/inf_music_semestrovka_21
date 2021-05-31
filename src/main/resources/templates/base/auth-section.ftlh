@@ -6,7 +6,7 @@
 <#macro content>
     <div id="auth-window" class="auth-section modal-window">
         <div id="sign-up-container" class="auth-form">
-            <form action="#">
+            <form method="post" action="/auth/signup">
                 <h1>Create Account</h1>
                 <input name="name" type="text" placeholder="Name" />
                 <input name="lastName" type="text" placeholder="Last name" />
@@ -16,7 +16,7 @@
             </form>
         </div>
         <div id="sign-in-container" class="auth-form">
-            <form action="#">
+            <form method="post" action="/auth/login">
                 <h1>Sign in</h1>
                 <input name="email" type="email" placeholder="Email" />
                 <input name="password" type="password" placeholder="Password" />

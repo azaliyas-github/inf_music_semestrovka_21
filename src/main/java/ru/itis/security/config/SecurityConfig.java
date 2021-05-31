@@ -6,7 +6,10 @@ import org.springframework.security.config.annotation.web.builders.*;
 import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.password.*;
+import org.springframework.security.web.authentication.rememberme.*;
 import org.springframework.security.web.util.matcher.*;
+
+import javax.sql.*;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -16,6 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -29,11 +35,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/sheet").permitAll()
                 .and()
                 .formLogin()
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/auth/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/main")
+                .defaultSuccessUrl("/")
                 .failureUrl("/login")
+	             .and()
+	             .rememberMe()
+	             .rememberMeParameter("rememberMe")
+	             .tokenRepository(tokenRepository())
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
@@ -41,5 +51,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .csrf().disable();
+    }
+
+    public PersistentTokenRepository tokenRepository() {
+    	var repository = new JdbcTokenRepositoryImpl();
+    	repository.setDataSource(dataSource);
+    	return repository;
     }
 }
