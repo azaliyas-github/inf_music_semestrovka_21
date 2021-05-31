@@ -36,7 +36,6 @@
                             </ul>
                         </li>
                         <li><a href="/prices">Prices</a></li>
-                        <li><a href="/tutors">Tutors</a></li>
                         <li><a href="/contact_information">Contact information</a></li>
                     </ul>
                 </li>
