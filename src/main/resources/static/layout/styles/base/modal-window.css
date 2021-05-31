@@ -7,3 +7,14 @@
 	z-index: 16383;
 	display: none;
 }
+
+#modal-window-overlay {
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 16382;
+	background-color: #000000A0;
+	display: none;
+}

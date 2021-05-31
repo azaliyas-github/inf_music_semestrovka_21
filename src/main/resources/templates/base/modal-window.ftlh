@@ -3,4 +3,6 @@
     <script src="/layout/scripts/base/modal-window.js"></script>
 </#macro>
 
-<#macro content></#macro>
+<#macro content>
+    <div id="modal-window-overlay prevent-default-onclick"></div>
+</#macro>

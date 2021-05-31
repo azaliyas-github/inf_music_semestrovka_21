@@ -3,15 +3,16 @@ $(function () {
 		if ($(this).hasClass("prevent-default-onclick"))
 			event.preventDefault();
 
-		$(".modal-window").hide();
+		$(".modal-window, #modal-window-overlay").hide();
 
 		const modalWindowId = $(this).attr("href");
-		$(modalWindowId).show();
+		$(modalWindowId + ", #modal-window-overlay").show();
 	});
-	$(".hide-modal-window").click(function (event) {
+
+	$(".hide-modal-window, #modal-window-overlay").click(function (event) {
 		if ($(this).hasClass("prevent-default-onclick"))
 			event.preventDefault();
 
-		$(".modal-window").hide();
+		$(".modal-window, #modal-window-overlay").hide();
 	});
 });
