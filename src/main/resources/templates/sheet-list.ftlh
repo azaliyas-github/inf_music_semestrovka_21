@@ -1,3 +1,8 @@
+<#function generateTooltipAttrIfNeed text maxLength>
+    <#assign tooltipAttr>title="${text}"</#assign>
+    <#return (text?length > maxLength)?then(tooltipAttr, "")>
+</#function>
+
 <#macro content sheets>
     <#if sheets??>
         <#list sheets as sheet>
@@ -8,14 +13,21 @@
                             <img src="/api/images/${sheet.previewSrc}" />
                         </div>
                         <div class="product-info">
-                            <h5 class="sheetName">${sheet.title?truncate_w(20, "…")}</h5>
-                            <h6 class="sheetAuthor">${sheet.composerName?truncate_w(27, "…")}</h6>
+                            <h5 class="sheetName"
+                                    ${generateTooltipAttrIfNeed(sheet.title, 20)}>
+                                ${sheet.title?truncate_w(20, "…")}
+                            </h5>
+                            <h6 class="sheetAuthor"
+                                    ${generateTooltipAttrIfNeed(sheet.composerName, 27)}>
+                                ${sheet.composerName?truncate_w(27, "…")}
+                            </h6>
                             <#if sheet.instruments??>
-                                <p class="instruments_list">
-                                    ${sheet.instruments
+                                <#assign instrumentsLine=sheet.instruments
                                     ?map(x -> x.getName())
-                                    ?join(", ")
-                                    ?truncate_w(25, "…")}
+                                    ?join(", ") />
+                                <p class="instruments_list"
+                                        ${generateTooltipAttrIfNeed(instrumentsLine, 25)}>
+                                    ${instrumentsLine?truncate_w(25, "…")}
                                 </p>
                             </#if>
                         </div>
