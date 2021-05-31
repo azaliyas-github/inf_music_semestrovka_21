@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+#header{padding:0 15px; border:solid; border-width:1px 0;}
+#header{border-color:rgba(255,255,255,.2);}
+
+#header #logo{margin:10px 0 0 0;}
+#header #logo h1{margin:0; padding:0; line-height:0; text-transform:uppercase;}
+#header #logo h1 a{color:inherit;}
+#header #upper_logo_part{font-size:15px;}
+#header #lower_logo_part{font-size:22.5px; margin-bottom: 2px}
+
+#mainav{}
+#mainav ul{text-transform:uppercase;}
+#mainav ul ul{position:absolute; width:180px; text-transform:none; z-index:9999;}
+#mainav ul ul ul{left:180px; top:0;}
+#mainav li{display:inline-block; position:relative; margin:0 15px 0 0; padding:0;}
+#mainav li:last-child{margin-right:0;}
+#mainav li li{width:100%; margin:0;}
+#mainav li a{display:block; padding:30px 0;}
+#mainav li li a{border:solid; border-width:0 0 1px 0;}
+#mainav .drop{padding-left:15px;}
+#mainav li li a, #mainav li li .drop{display:block; margin:0; padding:10px 15px;}
+#mainav .drop::after, #mainav li li .drop::after{content:"\f0d7";}
+#mainav .drop::after{top:35px; left:5px;}
+#mainav li li .drop::after{top:15px; left:5px;}
+#mainav ul ul{visibility:hidden; opacity:0;}
+#mainav ul li:hover > ul{visibility:visible; opacity:1;}
+
+#mainav form{display:none; margin:0; padding:0;}
+#mainav form select, #mainav form select option{display:block; cursor:pointer; outline:none;}
+#mainav form select{width:100%; padding:5px; border:none;}
+#mainav form select option{margin:5px; padding:0; border:none;}
+
+@media screen and (max-width:978px) {
+	#header{padding:30px 15px;}
+	#header #logo{margin-top:3px;}
+
+	#mainav{}
+	#mainav ul{display:none;}
+	#mainav form{display:block;}
+}
+
+@media screen and (max-width:750px) {
+	#header{padding:30px 0; text-align:center;}
+	#header #logo{margin:0 0 20px 0;}
+}
+
+/* Colours
+---------------------------------------------------------------------------- */
+#mainav{}
+#mainav li a{color:inherit;}
+#mainav .active a, #mainav a:hover, #mainav li:hover > a{color:#DBE5E7; background-color:inherit;}
+#mainav li li a, #mainav .active li a{color:#FFFFFF; background-color:rgba(130,157,162,.5);/* #829DA2 */ border-color:rgba(0,0,0,.6);}
+#mainav li li:hover > a, #mainav .active .active > a{color:#DBE5E7; background-color:#829DA2;}
+#mainav form select{color:#474747; background-color:#FFFFFF;}

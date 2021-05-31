@@ -3,6 +3,7 @@
 
 <#macro links>
     <link href="/layout/styles/base/header.css" rel="stylesheet" type="text/css" media="all">
+<@menu.links/>
 </#macro>
 
 <#macro content title custom_header>

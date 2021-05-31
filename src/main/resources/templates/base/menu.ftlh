@@ -1,3 +1,7 @@
+<#macro links>
+    <link href="/layout/styles/base/menu.css" rel="stylesheet" type="text/css" media="all">
+</#macro>
+
 <#macro content>
     <header id="header" class="hoc clear">
         <div id="logo" class="fl_left">
@@ -10,34 +14,33 @@
         </div>
         <nav id="mainav" class="fl_right">
             <ul class="clear">
-                <li><a href="../index.html">Home</a></li>
-                <li class="active"><a class="drop" href="#">Pages</a>
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/sheets" class="drop">Sheets</a>
                     <ul>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="full-width.html">Full Width</a></li>
-                        <li><a href="sidebar-left.html">Sidebar Left</a></li>
-                        <li><a href="sidebar-right.html">Sidebar Right</a></li>
-                        <li class="active"><a href="basic-grid.html">Basic Grid</a></li>
-                        <li><a href="font-icons.html">Font Icons</a></li>
+                        <li><a href="/sheets?instruments=Guitar">Guitar</a></li>
+                        <li><a href="/sheets?instruments=Piano">Piano</a></li>
+                        <li><a href="/sheets?instruments=Violin">Violin</a></li>
+                        <li><a href="/sheets?instruments=Vocal">Vocal</a></li>
+                        <li><a href="/sheets?instruments=Drums">Drums</a></li>
                     </ul>
                 </li>
-                <li><a class="drop" href="#">Dropdown</a>
+                <li><a class="drop" href="#">About our school</a>
                     <ul>
-                        <li><a href="#">Level 2</a></li>
-                        <li><a class="drop" href="#">Level 2 + Drop</a>
+                        <li><a class="drop" href="#">Courses</a>
                             <ul>
-                                <li><a href="#">Level 3</a></li>
-                                <li><a href="#">Level 3</a></li>
-                                <li><a href="#">Level 3</a></li>
+                                <li><a href="/courses/guitar">Guitar</a></li>
+                                <li><a href="/courses/piano">Piano</a></li>
+                                <li><a href="/courses/violin">Violin</a></li>
+                                <li><a href="/courses/vocal">Vocal</a></li>
+                                <li><a href="/courses/drums">Drums</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Level 2</a></li>
+                        <li><a href="/prices">Prices</a></li>
+                        <li><a href="/tutors">Tutors</a></li>
+                        <li><a href="/contact_information">Contact information</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Link Text</a></li>
-                <li><a href="#">Link Text</a></li>
-                <li><a href="#">Link Text</a></li>
-                <li><a href="#">Long Link Text</a></li>
+                <li><a href="/profile">Profile</a></li>
             </ul>
         </nav>
     </header>
