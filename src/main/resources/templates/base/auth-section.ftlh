@@ -4,7 +4,7 @@
 </#macro>
 
 <#macro content>
-    <div class="auth-section">
+    <div id="auth-window" class="auth-section modal-window">
         <div id="sign-up-container" class="auth-form">
             <form action="#">
                 <h1>Create Account</h1>
@@ -12,7 +12,7 @@
                 <input name="lastName" type="text" placeholder="Last name" />
                 <input name="email" type="email" placeholder="Email" />
                 <input name="password" type="password" placeholder="Password" />
-                <button>Sign Up</button>
+                <button class="hide-modal-window">Sign Up</button>
             </form>
         </div>
         <div id="sign-in-container" class="auth-form">
@@ -23,7 +23,7 @@
                 <label class="remember-me-checkbox">
                     <input name="rememberMe" type="checkbox">Remember me
                 </label>
-                <button>Sign In</button>
+                <button class="hide-modal-window">Sign In</button>
             </form>
         </div>
         <div class="outer-hello">

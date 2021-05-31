@@ -40,7 +40,11 @@
                         <li><a href="/contact_information">Contact information</a></li>
                     </ul>
                 </li>
-                <li><a href="/profile">Profile</a></li>
+                <li>
+                    <a href="#auth-window" class="show-modal-window prevent-default-onclick">
+                        Sign in
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
