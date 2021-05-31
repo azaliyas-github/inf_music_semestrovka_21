@@ -86,6 +86,15 @@
 .cta footer{text-align:center;}
 .cta footer a{display:block;}
 
+.founders img{
+	height: 80px;
+	width: 80px;
+}
+.our-photo {
+	width: 348px;
+	height: 261px;
+}
+
 @media screen and (max-width:750px) {
 	#pageintro article, #pageintro p{max-width:none; margin:auto;}
 	#pageintro .heading{font-size:2rem;}
