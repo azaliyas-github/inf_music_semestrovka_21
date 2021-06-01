@@ -7,7 +7,7 @@
 #text-part {
 	width: 35vw;
 }
-#text-part h1, h2, p {
+#text-part h1, #text-part h2,  #text-part p {
 	font-family: 'Alegreya Sans', sans-serif;
 	color: rgba(0, 0, 0, 0.77);
 }
@@ -15,7 +15,11 @@
 	font-weight: normal;
 	font-size: 25pt;
 }
-#text-part p, li{
+#text-part p{
+	font-weight: normal;
+	font-size: 13pt;
+}
+#text-part li{
 	font-weight: normal;
 	font-size: 13pt;
 }
