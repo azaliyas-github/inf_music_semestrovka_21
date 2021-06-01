@@ -1,3 +1,6 @@
 src/main/resources/static/**/*.jpg filter=lfs diff=lfs merge=lfs -text
 src/main/resources/static/**/*.png filter=lfs diff=lfs merge=lfs -text
 src/main/resources/static/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+
+src/main/resources/static/**/*.min.js binary
+src/main/resources/static/**/*.min.css binary

@@ -2,6 +2,8 @@
 <#import "header.ftlh" as header>
 <#import "main.ftlh" as main>
 <#import "footer.ftlh" as footer>
+<#import "auth-section.ftlh" as auth_section>
+<#import "modal-window.ftlh" as modal_window>
 
 <#macro main_lang>ru</#macro>
 <#macro base_html>
@@ -22,6 +24,8 @@
 <@base_scripts/>
 <@header.links/>
 <@footer.links/>
+<@auth_section.links/>
+<@modal_window.links/>
 <@head/>
 </#macro>
 
@@ -32,12 +36,14 @@
 <@header.content title custom_header/>
 <@main.content body custom_main/>
 <@footer.content/>
+<@auth_section.content/>
+<@modal_window.content/>
 </#macro>
 
 <#macro scripts></#macro>
 <#macro base_scripts>
-<script src="/layout/scripts/base/jquery.min.js"></script>
-<script src="/layout/scripts/base/jquery.mobilemenu.js"></script>
+<script src="/layout/scripts/base/jquery-3.6.0.min.js"></script>
+<script src="/layout/scripts/base/mobilemenu.min.js"></script>
 <@scripts/>
 </#macro>
 
