@@ -10,6 +10,10 @@ import ru.itis.dto.*;
 import ru.itis.exceptions.*;
 import ru.itis.services.*;
 
+import javax.annotation.security.*;
+import javax.validation.*;
+import java.util.*;
+
 @Controller
 @RequestMapping("auth")
 public class AuthController {
@@ -17,22 +21,28 @@ public class AuthController {
     private AuthService authService;
 
 	@GetMapping("/login")
-	public String loginPage() {
+	@PermitAll
+	public String getloginPage(Model model) {
+		model.addAttribute("userForm", new LoginForm());
 		return "login";
 	}
 
 	@GetMapping("/signup")
-	public String signupPage() {
+	@PermitAll
+	public String signupPage(Model model) {
+		model.addAttribute("registrationForm", new RegistrationForm());
 		return "signup";
 	}
 
 	@PostMapping(value = "/signup")
-	public String signUp(RegistrationForm form, BindingResult bindingResult, Model model) {
-		if (bindingResult.hasErrors())
-			return "redirect:/signup";
-
+	public String signUp(@Valid RegistrationForm form,
+	                     BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("registrationForm", form);
+			return "signup";
+		}
 		authService.signUp(form);
-		return "redirect:/";
+		return "redirect:/auth/login";
 	}
 
     @GetMapping("{user-id}/confirm/{confirm-code}")

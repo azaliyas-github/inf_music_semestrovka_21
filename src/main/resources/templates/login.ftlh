@@ -1,4 +1,5 @@
 <#include "base/layout.ftlh">
+<#import "spring.ftl" as spring/>
 <#macro title>Confirmation</#macro>
 
 <#macro base_head>
@@ -8,13 +9,13 @@
 <#macro base_body>
     <div id="container">
         <h1>Log In</h1>
-
-        <form>
+        <form method="post" action="/auth/login">
+            <p></p>
             <input type="email" name="email" placeholder="E-mail">
-            <input type="password" name="pass" placeholder="Password">
-            <a href="#">Log in</a>
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Log in">
             <div id="remember-container">
-                <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
+                <input type="checkbox" name="rememberMe" id="checkbox-2-1" class="checkbox" checked="checked"/>
                 <span id="remember">Remember me</span>
             </div>
         </form>
