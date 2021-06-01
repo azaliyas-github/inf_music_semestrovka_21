@@ -2,6 +2,7 @@ package ru.itis.controllers;
 
 import freemarker.template.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
@@ -15,6 +16,7 @@ import java.io.*;
 import java.util.*;
 
 @Controller
+@PreAuthorize("isAuthenticated()")
 public class SheetController {
     @Autowired
     public SheetService sheetService;
