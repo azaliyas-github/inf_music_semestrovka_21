@@ -111,7 +111,7 @@ main {
     -moz-appearance: none;
 }
 #add-form-shell {
-    transform: translate3d(0px, 105px, 100px);
+    transform: translate3d(0px, 120px, 100px);
     width: 15vw;
     border-style: solid;
     border-width: thin;
@@ -121,7 +121,7 @@ main {
 }
 #add-form-shell h3{
 	margin-top: 1vw;
-	margin-bottom: 1.4vw;
+	margin-bottom: 2vw;
 }
 #add-form-shell h3{
     text-align: center;
@@ -214,7 +214,7 @@ main {
 }
 .product-card {
     padding: 4px;
-    height: 18vw;
+    height: 19vw;
     width: 12vw;
 }
 .product-image {
