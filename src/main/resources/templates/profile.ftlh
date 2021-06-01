@@ -36,10 +36,12 @@
         </div>
     </#if>
     <#if authorities?seq_contains("MODERATOR")>
-        <form id="ban-user-form" method="post">
-            <input name="userId" type="number">
-            <button type="submit">BAN</button>
-        </form>
+        <div class="personal_inf_block_border ban-form">
+            <form id="ban-user-form" method="post">
+            <input id="user-id-input" type="number" name="userId" placeholder="User ID">
+            <input id="ban-button" type="submit" value="BAN USER">
+            </form>
+        </div>
     </#if>
 </#macro>
 
