@@ -1,0 +1,26 @@
+#main-pic img {
+	height: 20vw;
+}
+#main-pic {
+	padding-bottom: 3vw;
+}
+#text-part {
+	width: 35vw;
+}
+#text-part h1, h2, p {
+	font-family: 'Alegreya Sans', sans-serif;
+	color: rgba(0, 0, 0, 0.77);
+}
+#text-part h1 {
+	font-weight: normal;
+	font-size: 25pt;
+}
+#text-part p, li{
+	font-weight: normal;
+	font-size: 13pt;
+}
+#text-part h2 {
+	padding-top: 2vw;
+	font-weight: normal;
+	font-size: 22pt;
+}
