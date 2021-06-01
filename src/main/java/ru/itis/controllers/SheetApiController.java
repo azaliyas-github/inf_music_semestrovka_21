@@ -2,6 +2,7 @@ package ru.itis.controllers;
 
 import freemarker.template.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.model.*;
 import ru.itis.services.*;
@@ -10,6 +11,7 @@ import java.io.*;
 import java.util.*;
 
 @RestController
+@PreAuthorize("isAuthenticated()")
 public class SheetApiController {
 	@Autowired
 	public SheetService sheetService;

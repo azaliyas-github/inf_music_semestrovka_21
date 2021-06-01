@@ -1,6 +1,7 @@
 package ru.itis.controllers;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.*;
@@ -9,6 +10,7 @@ import ru.itis.utils.*;
 
 @Controller
 @RequestMapping("api/pdf/")
+@PreAuthorize("isAuthenticated()")
 public class PdfController {
     @Autowired
     private PdfRepository repository;
