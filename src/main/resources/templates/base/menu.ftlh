@@ -15,7 +15,7 @@
         <nav id="mainav" class="fl_right">
             <ul class="clear">
                 <li><a href="/">Home</a></li>
-                <#if authentication.getPrincipal() != "anonymousUser">
+                <#if authentication?? && authentication.getPrincipal() != "anonymousUser">
                 <li class="active"><a href="/sheets" class="drop">Sheets</a>
                     <ul>
                         <li><a href="/sheets?instruments=Guitar">Guitar</a></li>
@@ -42,7 +42,7 @@
                     </ul>
                 </li>
                 <li>
-                    <#if authentication.getPrincipal() == "anonymousUser">
+                    <#if !authentication?? || authentication.getPrincipal() == "anonymousUser">
                     <a href="#auth-window" class="show-modal-window prevent-default-onclick">
                         Sign in
                     </a>
