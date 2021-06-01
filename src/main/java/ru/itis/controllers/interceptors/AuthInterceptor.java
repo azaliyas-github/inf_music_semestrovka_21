@@ -15,10 +15,10 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (modelAndView == null)
             return;
 
-        populateModel(modelAndView.getModelMap());
+        populateModel(modelAndView.getModelMap(), request.getRequestURI());
     }
 
-    public void populateModel(Map<String, Object> model) {
+    public void populateModel(Map<String, Object> model, String currentUrl) {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         var authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
@@ -26,5 +26,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 
         model.put("authentication", authentication);
         model.put("authorities", authorities);
+        model.put("currentUrl", currentUrl);
     }
 }

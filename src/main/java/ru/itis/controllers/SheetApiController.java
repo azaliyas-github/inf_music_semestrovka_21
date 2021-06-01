@@ -39,7 +39,7 @@ public class SheetApiController {
 
 		var model = new HashMap<String, Object>();
 		model.put("sheets", sheets);
-		authInterceptor.populateModel(model);
+		authInterceptor.populateModel(model, "/sheets/search");
 
 		StringWriter writer = new StringWriter();
 		try {
