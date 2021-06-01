@@ -40,9 +40,13 @@
                     </ul>
                 </li>
                 <li>
+                    <#if authentication.getPrincipal() == "anonymousUser">
                     <a href="#auth-window" class="show-modal-window prevent-default-onclick">
                         Sign in
                     </a>
+                    <#else>
+                    <a href="/profile">Profile</a>
+                    </#if>
                 </li>
             </ul>
         </nav>
