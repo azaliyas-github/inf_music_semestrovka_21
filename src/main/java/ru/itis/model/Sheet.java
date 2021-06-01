@@ -27,4 +27,6 @@ public class Sheet {
 
     private String src;
     private String previewSrc;
+
+    private Long createdByUserId;
 }
