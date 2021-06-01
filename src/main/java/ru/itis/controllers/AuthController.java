@@ -16,6 +16,16 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+	@GetMapping("/login")
+	public String loginPage() {
+		return "login";
+	}
+
+	@GetMapping("/signup")
+	public String signupPage() {
+		return "signup";
+	}
+
 	@PostMapping(value = "/signup")
 	public String signUp(RegistrationForm form, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors())
