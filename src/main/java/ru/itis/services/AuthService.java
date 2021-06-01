@@ -80,6 +80,12 @@ public class AuthService {
         sendConfirmMailTo(user.get());
     }
 
+    public void banUser(Long userId) {
+    	var user = usersRepository.findById(userId).get();
+    	user.setStatus(User.Status.BANNED);
+    	usersRepository.save(user);
+    }
+
     private void sendConfirmMailTo(User user) {
         String confirmMail = mailsGenerator.getMailForConfirm(serverUrl,
                 user.getConfirmCode(), user.getName(), user.getId());

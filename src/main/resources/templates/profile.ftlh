@@ -3,6 +3,7 @@
 
 <#macro head>
     <link href="/layout/styles/profile.css" rel="stylesheet" type="text/css">
+    <script src="/layout/scripts/profile.js"></script>
 </#macro>
 
 <#macro custom_header>
@@ -33,6 +34,12 @@
                 <p class="thick_font">${user.email}</p>
             </div>
         </div>
+    </#if>
+    <#if authorities?seq_contains("MODERATOR")>
+        <form id="ban-user-form" method="post">
+            <input name="userId" type="number">
+            <button type="submit">BAN</button>
+        </form>
     </#if>
 </#macro>
 
