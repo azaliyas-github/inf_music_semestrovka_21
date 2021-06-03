@@ -26,19 +26,24 @@ public class SheetService {
     private ImageRepository imageRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private PdfUtil pdfUtil;
 
-    public void createSheet(SheetForm form) {
+    public void createSheet(SheetForm form, String userEmail) {
         var preview = pdfUtil.renderPreview(form.getPdf());
         var instruments = instrumentService.getByName(form.getInstruments());
         var imageFileName = imageRepository.saveNew(preview, "jpg");
         var pdfFileName = pdfRepository.saveNew(form.getPdf());
+        var user = userRepository.findByEmail(userEmail).get();
         sheetRepository.save(Sheet.builder()
 				.title(form.getName())
                 .instruments(instruments)
                 .composerName(form.getComposer())
                 .previewSrc(imageFileName)
                 .src(pdfFileName)
+	             .createdByUserId(user.getId())
                 .build());
     }
 

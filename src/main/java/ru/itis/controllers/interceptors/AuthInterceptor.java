@@ -1,5 +1,6 @@
 package ru.itis.controllers.interceptors;
 
+import org.springframework.security.core.*;
 import org.springframework.security.core.context.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.servlet.*;
@@ -15,6 +16,10 @@ public class AuthInterceptor implements HandlerInterceptor {
             return;
 
         var authentication = SecurityContextHolder.getContext().getAuthentication();
+        var authorities = authentication.getAuthorities().stream()
+	        .map(GrantedAuthority::getAuthority)
+	        .toArray();
         modelAndView.getModelMap().addAttribute("authentication", authentication);
+        modelAndView.getModelMap().addAttribute("authorities", authorities);
     }
 }

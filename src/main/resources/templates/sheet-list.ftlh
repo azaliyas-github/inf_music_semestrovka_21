@@ -30,6 +30,9 @@
                                     ${instrumentsLine?truncate_w(25, "…")}
                                 </p>
                             </#if>
+                            <#if authorities?seq_contains("MODERATOR")>
+                                <p>User id: ${sheet.createdByUserId}</p>
+                            </#if>
                         </div>
                     </div>
                 </a>

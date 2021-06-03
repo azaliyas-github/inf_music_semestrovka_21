@@ -3,12 +3,15 @@ package ru.itis.controllers;
 import freemarker.template.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.dto.*;
 import ru.itis.model.*;
+import ru.itis.security.details.*;
 import ru.itis.services.*;
 import ru.itis.utils.*;
 
@@ -42,9 +45,10 @@ public class SheetController {
 
     @PostMapping("/add_sheet")
     public String saveSheet(SheetForm sheetForm,
-                            BindingResult bindingResult, Model model) {
+                            BindingResult bindingResult, Model model,
+	         Authentication authentication) {
         if (!bindingResult.hasErrors()) {
-            sheetService.createSheet(sheetForm);
+            sheetService.createSheet(sheetForm, authentication.getName());
             return "redirect:/sheets";
         }
 
