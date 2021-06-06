@@ -3,6 +3,7 @@ package ru.itis.services;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
+import ru.itis.aspects.*;
 import ru.itis.dto.*;
 import ru.itis.exceptions.*;
 import ru.itis.model.*;
@@ -37,6 +38,7 @@ public class AuthService {
     @Value("${spring.mail.properties.mail.subject}")
     private String subject;
 
+    @LogExecutionInfo
     public void signUp(RegistrationForm form) {
         User user = User.builder()
                 .name(form.getName())
@@ -80,6 +82,7 @@ public class AuthService {
         sendConfirmMailTo(user.get());
     }
 
+	@LogExecutionInfo
     public void banUser(Long userId) {
     	var user = usersRepository.findById(userId).get();
     	user.setStatus(User.Status.BANNED);
