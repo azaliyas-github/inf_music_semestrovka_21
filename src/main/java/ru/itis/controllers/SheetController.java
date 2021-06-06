@@ -1,21 +1,17 @@
 package ru.itis.controllers;
 
-import freemarker.template.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.access.prepost.*;
 import org.springframework.security.core.*;
-import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.dto.*;
 import ru.itis.model.*;
-import ru.itis.security.details.*;
 import ru.itis.services.*;
 import ru.itis.utils.*;
 
-import java.io.*;
 import java.util.*;
 
 @Controller
@@ -27,12 +23,16 @@ public class SheetController {
     @Autowired
     InstrumentService instrumentService;
 
-    @Autowired
-    private Configuration configuration;
+	@GetMapping("/sheets")
+    public String getSheetsPage(Model model, @RequestParam(required = false) String instrumentName) {
+	    List<Sheet> sheets = instrumentName != null
+	        ? sheetService.filterSheets(instrumentName)
+		    : sheetService.getAllSheets();
+        if (instrumentName != null && sheets == null) {
+            throw new IllegalArgumentException("Instrument " + instrumentName + " not found");
+        }
+		model.addAttribute("sheets", sheets);
 
-    @GetMapping("/sheets")
-    public String getSheetsPage(Model model) {
-        model.addAttribute("sheets", sheetService.getAllSheets());
         var instruments = instrumentService.getAll().stream()
                 .map(Instrument::getName)
 				.sorted()

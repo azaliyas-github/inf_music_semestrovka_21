@@ -16,15 +16,15 @@
             <ul class="clear">
                 <li><a href="/">Home</a></li>
                 <#if authentication?? && authentication.getPrincipal() != "anonymousUser">
-                <li class="active"><a href="/sheets" class="drop">Sheets</a>
-                    <ul>
-                        <li><a href="/sheets?instruments=Guitar">Guitar</a></li>
-                        <li><a href="/sheets?instruments=Piano">Piano</a></li>
-                        <li><a href="/sheets?instruments=Violin">Violin</a></li>
-                        <li><a href="/sheets?instruments=Vocal">Vocal</a></li>
-                        <li><a href="/sheets?instruments=Drums">Drums</a></li>
-                    </ul>
-                </li>
+                    <li class="active"><a href="/sheets" class="drop">Sheets</a>
+                        <ul>
+                            <li><a href="/sheets?instrumentName=Guitar">Guitar</a></li>
+                            <li><a href="/sheets?instrumentName=Piano">Piano</a></li>
+                            <li><a href="/sheets?instrumentName=Violin">Violin</a></li>
+                            <li><a href="/sheets?instrumentName=Vocal">Vocal</a></li>
+                            <li><a href="/sheets?instrumentName=Drums">Drums</a></li>
+                        </ul>
+                    </li>
                 </#if>
                 <li><a class="drop" href="#">About our school</a>
                     <ul>

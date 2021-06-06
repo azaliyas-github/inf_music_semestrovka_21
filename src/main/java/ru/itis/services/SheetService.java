@@ -13,6 +13,9 @@ import java.util.*;
 
 @Service
 public class SheetService {
+	@Autowired
+	private InstrumentRepository instrumentRepository;
+
     @Autowired
     private SheetRepository sheetRepository;
 
@@ -70,4 +73,12 @@ public class SheetService {
 
         return IterableUtils.toList(foundSheets);
     }
+
+	public List<Sheet> filterSheets(String instrumentName) {
+		Instrument instrument = instrumentRepository.findByName(instrumentName);
+		if (instrument == null)
+			return null;
+
+		return sheetRepository.findByInstruments(instrument);
+	}
 }

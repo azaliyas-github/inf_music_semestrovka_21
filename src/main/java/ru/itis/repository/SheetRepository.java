@@ -8,4 +8,5 @@ import java.util.*;
 
 public interface SheetRepository extends JpaRepository<Sheet, Long>, QuerydslPredicateExecutor<Sheet> {
     List<Sheet> findAll();
+    List<Sheet> findByInstruments(Instrument instrument);
 }
