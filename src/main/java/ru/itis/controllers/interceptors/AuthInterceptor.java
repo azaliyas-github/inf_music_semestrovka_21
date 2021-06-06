@@ -19,7 +19,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         var authorities = authentication.getAuthorities().stream()
 	        .map(GrantedAuthority::getAuthority)
 	        .toArray();
-        modelAndView.getModelMap().addAttribute("authentication", authentication);
-        modelAndView.getModelMap().addAttribute("authorities", authorities);
+        modelAndView.addObject("authentication", authentication);
+        modelAndView.addObject("authorities", authorities);
     }
 }
