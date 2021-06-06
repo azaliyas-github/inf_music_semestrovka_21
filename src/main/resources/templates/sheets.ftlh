@@ -22,7 +22,7 @@
             <button id="search-submit-button" type="submit">Submit</button>
         </form>
     </section>
-    <section>
+    <section class="sec-add-form">
         <div id="add-form-shell">
             <h3>Add new sheet</h3>
             <@spring.bind "sheetForm"/>
