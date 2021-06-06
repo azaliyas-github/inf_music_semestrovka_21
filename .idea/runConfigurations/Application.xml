@@ -2,7 +2,7 @@
   <configuration default="false" name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
     <module name="inf_music_semestrovka_21" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="ru.itis.Application" />
-    <option name="WORKING_DIRECTORY" value="file://work-dir" />
+    <option name="WORKING_DIRECTORY" value="file://work-dir/app" />
     <option name="ALTERNATIVE_JRE_PATH" />
     <option name="SHORTEN_COMMAND_LINE" value="NONE" />
     <additionalParameters>
