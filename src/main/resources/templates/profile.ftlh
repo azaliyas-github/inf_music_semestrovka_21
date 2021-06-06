@@ -4,6 +4,8 @@
 <#macro head>
     <link href="/layout/styles/profile.css" rel="stylesheet" type="text/css">
     <script src="/layout/scripts/profile.js"></script>
+    <link href="/layout/styles/profile-photo.css" rel="stylesheet" type="text/css">
+    <script src="/layout/scripts/profile-photo.js"></script>
 </#macro>
 
 <#macro custom_header>
@@ -12,7 +14,11 @@
             <div id="outer_img_shell"></div>
             <div class="image-cropper">
                 <#if profile??>
-                    <img id="profile_image" src="/api/images/${profile.photoFileName}">
+                    <div class="profile-pic-div">
+                        <img src="/api/images/${profile.photoFileName}" id="profile-photo">
+                        <input type="file" id="photo-input">
+                        <label for="photo-input" class="upload-button">Choose Photo</label>
+                    </div>
                 </#if>
             </div>
             <#if user??>

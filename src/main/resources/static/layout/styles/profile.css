@@ -17,19 +17,14 @@
     padding-top: 1.5vw;
 }
 .image-cropper {
-    float: left;
-    width: 5vw;
-    height: 5vw;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-    margin-left: 1.5vw;
+	float: left;
+	width: 100px;
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%;
+	margin-left: 2vw;
 }
-#profile_image {
-    display: inline-block;
-    margin: 0 auto;
-    width: auto;
- }
 #name_and_lastName {
     display: inline-block;
     color: slategray;
