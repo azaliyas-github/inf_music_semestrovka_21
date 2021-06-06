@@ -4,5 +4,5 @@
 </#macro>
 
 <#macro content>
-    <div id="modal-window-overlay prevent-default-onclick"></div>
+    <div id="modal-window-overlay" class="prevent-default-onclick"></div>
 </#macro>
