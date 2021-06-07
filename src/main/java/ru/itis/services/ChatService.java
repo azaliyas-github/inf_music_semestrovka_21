@@ -10,6 +10,7 @@ import ru.itis.repository.*;
 
 import java.time.*;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.*;
 
 @Service
@@ -20,12 +21,19 @@ public class ChatService {
 	@Autowired
 	private ProfileRepository profileRepository;
 
+	@Autowired
+	private Random random;
+
+	private ConcurrentHashMap<Long, Long> userToModeratorMap = new ConcurrentHashMap<>();
+
+	private final String moderatorsGroupId = "moderators";
+
 	public List<ChatUserDto> getRecipients(Long senderId) {
 		var sender = userRepository.getOne(senderId);
-		var recipients = sender.isAdmin()
-			? userRepository.findAllByRole(User.Role.USER)
-			: userRepository.findAllByRole(User.Role.MODERATOR);
+		if (!sender.isAdmin())
+			return List.of();
 
+		var recipients = userRepository.findAllByRole(User.Role.USER);
 		var recipientProfiles = profileRepository.findAllByUserIdIn(
 			recipients.stream().map(User::getId).collect(Collectors.toList()));
 		return ChatUserDto.from(recipients, recipientProfiles);
@@ -43,12 +51,35 @@ public class ChatService {
 			throw new BusinessException("Can't send message from sender " + message.getSenderId() + " to itself");
 		message.setCreationTimestamp(Instant.now());
 
-		var sender = userRepository.getOne(message.getSenderId());
-		var recipient = userRepository.getOne(message.getRecipientId());
-
+		var sender = getUser(message.getSenderId());
 		message.setSenderName(sender.getFullName());
+
+		var recipient = getRecipient(sender, message.getRecipientId());
+		message.setRecipientId(recipient.getId().toString());
 		message.setRecipientName(recipient.getFullName());
 
 		return message;
+	}
+
+	private User getUser(String groupId) {
+		var userId = Long.parseLong(groupId);
+		return userRepository.getOne(userId);
+	}
+
+	private User getRecipient(User sender, String recipientGroupId) {
+		if (recipientGroupId.equals(moderatorsGroupId)) {
+			var moderatorId = userToModeratorMap.getOrDefault(sender.getId(), null);
+			if (moderatorId != null)
+				return userRepository.getOne(moderatorId);
+
+			var moderators = userRepository.findAllByRole(User.Role.MODERATOR);
+			var randomIndex = random.nextInt(moderators.size());
+
+			var randomModerator = moderators.get(randomIndex);
+			userToModeratorMap.put(sender.getId(), randomModerator.getId());
+			return randomModerator;
+		}
+
+		return getUser(recipientGroupId);
 	}
 }

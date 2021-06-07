@@ -7,24 +7,30 @@
 
 <#macro content current_user>
 	<script>
-		const currentUserId = ${current_user.id};
+		const isModerator = ${authorities?seq_contains("MODERATOR")?c};
+		const currentUserId = "${current_user.id}";
 	</script>
-	<div class="chat-window not-connected">
-		<aside>
-			<#if chat_users??>
-				<ul>
-					<#list chat_users as user>
-						<li class="recipient-selector">
-							<input class="user-id" value="${user.id}">
-							<img src="/api/images/${user.photoFileName}">
-							<div>
-								<h2>${user.fullName}</h2>
-							</div>
-						</li>
-               </#list>
-				</ul>
-         </#if>
-		</aside>
+	<#assign recipientSelectedClass>
+		 ${authorities?seq_contains("MODERATOR")?then("", " recipient-selected")}
+	</#assign>
+	<div class="chat-window not-connected${recipientSelectedClass}">
+		<#if authorities?seq_contains("MODERATOR")>
+			<aside>
+				<#if chat_users??>
+					<ul>
+						<#list chat_users as user>
+							<li class="recipient-selector">
+								<input class="user-id" value="${user.id}">
+								<img src="/api/images/${user.photoFileName}">
+								<div>
+									<h2>${user.fullName}</h2>
+								</div>
+							</li>
+	               </#list>
+					</ul>
+	         </#if>
+			</aside>
+		</#if>
 		<main>
 			<header>
 				<img id="selected-recipient-photo" basesrc="/api/images/" src="">
