@@ -4,6 +4,7 @@ import freemarker.template.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.access.prepost.*;
 import org.springframework.web.bind.annotation.*;
+import ru.itis.controllers.interceptors.*;
 import ru.itis.model.*;
 import ru.itis.services.*;
 
@@ -20,6 +21,9 @@ public class SheetApiController {
 	InstrumentService instrumentService;
 
 	@Autowired
+	private AuthInterceptor authInterceptor;
+
+	@Autowired
 	private Configuration configuration;
 
 	@GetMapping(value = "/sheets/search", produces = "application/xml")
@@ -33,11 +37,13 @@ public class SheetApiController {
 
 		List<Sheet> sheets = sheetService.searchSheets(query, instruments);
 
-		var attributes = new HashMap<String, Object>();
-		attributes.put("sheets", sheets);
+		var model = new HashMap<String, Object>();
+		model.put("sheets", sheets);
+		authInterceptor.populateModel(model);
+
 		StringWriter writer = new StringWriter();
 		try {
-			sheetsTemplate.process(attributes, writer);
+			sheetsTemplate.process(model, writer);
 		} catch (TemplateException | IOException e) {
 			throw new IllegalStateException(e);
 		}
