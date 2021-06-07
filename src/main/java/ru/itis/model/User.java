@@ -50,4 +50,8 @@ public class User {
     public boolean isAdmin() {
         return this.role == Role.MODERATOR;
     }
+
+    public String getFullName() {
+	    return name + " " + lastName;
+    }
 }
