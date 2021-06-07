@@ -63,13 +63,19 @@ $(function() {
 					usersResponse.forEach(addUser);
 				});
 	}
+	function fetchUser(userId) {
+		if (isModerator && !userCache.has(parseInt(userId, 10)))
+			$.get("/chat/users/" + userId, addUser);
+	}
 
 	function onMessageReceived(stompMessage) {
 		const message = JSON.parse(stompMessage.body);
 		if (message.senderId === currentUserId)
 			addMessageFromUs(message);
-		else
+		else {
+			fetchUser(message.senderId);
 			addMessageFromThem(message);
+		}
 	}
 	function onStompClientConnected() {
 		stompClient.subscribe("/chat/users/" + currentUserId + "/messages", onMessageReceived);
