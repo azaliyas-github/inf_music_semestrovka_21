@@ -7,6 +7,7 @@
 
 <#macro content current_user>
 	<script>
+		const isModerator = ${authorities?seq_contains("MODERATOR")?c};
 		const currentUserId = ${current_user.id};
 	</script>
 	<div class="chat-window not-connected">

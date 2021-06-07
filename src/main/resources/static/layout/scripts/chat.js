@@ -3,6 +3,34 @@ $(function() {
 	const sockJsClient = new SockJS("/chat");
 	const stompClient = Stomp.over(sockJsClient);
 
+	const chat = chatWindow.find("#chat");
+	const messagePrototype = chat.find("li.prototype");
+	function isMessageInChatWithSelectedRecipient(counterpartyId) {
+		return !isModerator || counterpartyId === selectedRecipient?.id;
+	}
+	function addMessage(message) {
+		const counterpartyId = message.senderId === currentUserId ? message.recipientId : message.senderId;
+		if (!isMessageInChatWithSelectedRecipient(counterpartyId))
+			return;
+
+		const messageClassName = message.senderId === currentUserId ? "me" : "you";
+
+		const messageElement = messagePrototype.clone();
+		messageElement.removeClass("prototype");
+		messageElement.addClass(messageClassName);
+
+		messageElement.find(".author-name").text(message.senderName);
+		messageElement.find(".message").text(message.content);
+		messageElement.find(".message-datetime").text(
+			new Date(message.creationTimestamp).toLocaleString());
+
+		messageElement.appendTo(chat);
+	}
+
+	function addStompMessage(stompMessage) {
+		const message = JSON.parse(stompMessage.body);
+		addMessage(message);
+	}
 	function showChat() {
 		chatWindow.removeClass("not-connected");
 	}
@@ -11,7 +39,7 @@ $(function() {
 	}
 	stompClient.connect({},
 		function() {
-			stompClient.subscribe("/chat/users/" + currentUserId + "/messages");
+			stompClient.subscribe("/chat/users/" + currentUserId + "/messages", addStompMessage);
 			showChat();
 		},
 		hideChat);
