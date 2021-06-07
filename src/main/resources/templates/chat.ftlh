@@ -1,10 +1,15 @@
 <#macro links>
 	<link href="/layout/styles/chat.css" rel="stylesheet" type="text/css">
+	<script src="/layout/scripts/base/sockjs-1.5.1.min.js"></script>
+	<script src="/layout/scripts/base/stomp-4.0.8.min.js"></script>
 	<script src="/layout/scripts/chat.js"></script>
 </#macro>
 
-<#macro content>
-	<div class="chat-window">
+<#macro content current_user>
+	<script>
+		const currentUserId = ${current_user.id};
+	</script>
+	<div class="chat-window not-connected">
 		<aside>
 			<#if chat_users??>
 				<ul>
@@ -28,78 +33,18 @@
 				</div>
 			</header>
 			<ul id="chat">
-				<li class="you">
+				<li class="prototype">
 					<div class="entete">
-						<span class="status green"></span>
-						<h2>Vincent</h2>
-						<h3>10:12AM, Today</h3>
+						<h2 class="author-name"></h2>
+						<h3 class="message-datetime"></h3>
 					</div>
 					<div class="triangle"></div>
-					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						OK
-					</div>
-				</li>
-				<li class="you">
-					<div class="entete">
-						<span class="status green"></span>
-						<h2>Vincent</h2>
-						<h3>10:12AM, Today</h3>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						OK
-					</div>
+					<div class="message"></div>
 				</li>
 			</ul>
 			<footer>
-				<textarea placeholder="Type your message"></textarea>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt="">
-				<a href="#">Send</a>
+				<textarea class="message-content" placeholder="Type your message"></textarea>
+				<a class="send-button" href="#">Send</a>
 			</footer>
 		</main>
 	</div>
