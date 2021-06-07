@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.itis.dto.*;
 import ru.itis.services.*;
 
+import java.util.*;
+
 @Controller
 @RequestMapping("chat")
 public class ChatController {
@@ -34,5 +36,10 @@ public class ChatController {
 	@GetMapping("users/{user-id}")
 	public @ResponseBody ChatUserDto getUser(@PathVariable("user-id") Long userId) {
 		return chatService.getUser(userId);
+	}
+
+	@GetMapping("users")
+	public @ResponseBody List<ChatUserDto> getUsers() {
+		return chatService.getUsers();
 	}
 }

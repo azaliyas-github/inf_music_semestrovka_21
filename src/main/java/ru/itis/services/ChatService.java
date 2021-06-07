@@ -28,15 +28,11 @@ public class ChatService {
 
 	private final String moderatorsGroupId = "moderators";
 
-	public List<ChatUserDto> getRecipients(Long senderId) {
-		var sender = userRepository.getOne(senderId);
-		if (!sender.isAdmin())
-			return List.of();
-
-		var recipients = userRepository.findAllByRole(User.Role.USER);
-		var recipientProfiles = profileRepository.findAllByUserIdIn(
-			recipients.stream().map(User::getId).collect(Collectors.toList()));
-		return ChatUserDto.from(recipients, recipientProfiles);
+	public List<ChatUserDto> getUsers() {
+		var users = userRepository.findAllByRole(User.Role.USER);
+		var profiles = profileRepository.findAllByUserIdIn(
+			users.stream().map(User::getId).collect(Collectors.toList()));
+		return ChatUserDto.from(users, profiles);
 	}
 
 	public ChatUserDto getUser(Long userId) {

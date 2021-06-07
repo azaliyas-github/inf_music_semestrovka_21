@@ -32,8 +32,6 @@ public class ProfileController {
 			  Optional<Profile> profile = profileRepository.findByUserId(user.getId());
 			  model.addAttribute("profile", profile.orElse(null));
 			  model.addAttribute("user", user);
-
-			  model.addAttribute("chat_users", chatService.getRecipients(user.getId()));
 		  }
 
         return "profile";
