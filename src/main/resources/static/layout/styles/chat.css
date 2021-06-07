@@ -14,6 +14,9 @@
 	border-radius:5px;
 	overflow:hidden;
 }
+.chat-window.not-connected{
+	display: none;
+}
 .chat-window aside{
 	width:260px;
 	height:800px;
@@ -146,6 +149,9 @@
 }
 .chat-window #chat li{
 	padding:10px 30px;
+}
+.chat-window #chat li.prototype{
+	display: none;
 }
 .chat-window #chat h2,#chat h3{
 	display:inline-block;

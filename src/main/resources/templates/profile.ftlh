@@ -45,7 +45,7 @@
             </form>
         </div>
     </#if>
-    <@chat.content/>
+    <@chat.content user/>
 </#macro>
 
 <@display_page/>
