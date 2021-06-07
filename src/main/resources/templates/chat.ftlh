@@ -16,24 +16,19 @@
 	<div class="chat-window not-connected${recipientSelectedClass}">
 		<#if authorities?seq_contains("MODERATOR")>
 			<aside>
-				<#if chat_users??>
-					<ul>
-						<#list chat_users as user>
-							<li class="recipient-selector">
-								<input class="user-id" value="${user.id}">
-								<img src="/api/images/${user.photoFileName}">
-								<div>
-									<h2>${user.fullName}</h2>
-								</div>
-							</li>
-	               </#list>
-					</ul>
-	         </#if>
+				<ul class="users">
+					<li class="recipient-selector prototype">
+						<img class="profile-photo" src="">
+						<div>
+							<h2 class="user-name"></h2>
+						</div>
+					</li>
+				</ul>
 			</aside>
 		</#if>
 		<main>
 			<header>
-				<img id="selected-recipient-photo" basesrc="/api/images/" src="">
+				<img id="selected-recipient-photo" src="">
 				<div>
 					<h2 id="selected-recipient-name"></h2>
 				</div>

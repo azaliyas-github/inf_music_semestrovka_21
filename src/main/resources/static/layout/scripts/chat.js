@@ -26,6 +26,44 @@ $(function() {
 		messageElement.appendTo(chat);
 	}
 
+	let selectedRecipient;
+	const selectedRecipientName = $("#selected-recipient-name");
+	const selectedRecipientPhoto = $("#selected-recipient-photo");
+
+	const imageBaseUrl = "/api/images/";
+	const userCache = new Map();
+	const userList = $(".chat-window .users");
+	const userPrototype = userList.find("li.prototype");
+	function onClickOnUser() {
+		const userId = $(this).data("user-id");
+		selectedRecipient = userCache.get(userId);
+		selectedRecipientName.html(selectedRecipient.fullName);
+		selectedRecipientPhoto.attr("src", imageBaseUrl + selectedRecipient.photoFileName);
+		chatWindow.addClass("recipient-selected");
+	}
+	function addUser(user) {
+		userCache.set(user.id, user);
+
+		const userElement = userPrototype.clone();
+		userElement.removeClass("prototype");
+
+		userElement.data("user-id", user.id);
+		userElement.find(".user-name").text(user.fullName);
+		userElement.find(".profile-photo").attr("src", imageBaseUrl + user.photoFileName);
+
+		userElement.click(onClickOnUser);
+
+		userElement.prependTo(userList);
+	}
+	function fetchUserList() {
+		if (isModerator)
+			$.get(
+				"/chat/users",
+				function(usersResponse) {
+					usersResponse.forEach(addUser);
+				});
+	}
+
 	function onMessageReceived(stompMessage) {
 		const message = JSON.parse(stompMessage.body);
 		if (message.senderId === currentUserId)
@@ -35,29 +73,14 @@ $(function() {
 	}
 	function onStompClientConnected() {
 		stompClient.subscribe("/chat/users/" + currentUserId + "/messages", onMessageReceived);
+		fetchUserList();
+
 		chatWindow.removeClass("not-connected");
 	}
 	function onStompClientConnectionError() {
 		chatWindow.addClass("not-connected");
 	}
 	stompClient.connect({}, onStompClientConnected, onStompClientConnectionError);
-
-	let selectedRecipient;
-	const selectedRecipientName = $("#selected-recipient-name");
-	const selectedRecipientPhoto = $("#selected-recipient-photo");
-	const baseImageSrc = selectedRecipientPhoto.attr("basesrc");
-	if (isModerator)
-		$(".recipient-selector").click(function() {
-			const selectedRecipientId = $(this).find("input.user-id").val();
-			$.get("/chat/users/" + selectedRecipientId,
-				function(recipient) {
-					selectedRecipient = recipient;
-
-					selectedRecipientName.html(recipient.fullName);
-					selectedRecipientPhoto.attr("src", baseImageSrc + recipient.photoFileName);
-					chatWindow.addClass("recipient-selected");
-				});
-		});
 
 	const messageContent = $(".message-content");
 	$(".send-button").click(function(event) {

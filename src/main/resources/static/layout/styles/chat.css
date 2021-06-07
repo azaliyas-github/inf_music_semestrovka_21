@@ -110,6 +110,9 @@
 	margin-right:0;
 	margin-left:7px;
 }
+.chat-window .prototype{
+	display: none;
+}
 .chat-window main header{
 	height:110px;
 	padding:30px 20px 30px 40px;
@@ -149,9 +152,6 @@
 }
 .chat-window #chat li{
 	padding:10px 30px;
-}
-.chat-window #chat li.prototype{
-	display: none;
 }
 .chat-window #chat h2,#chat h3{
 	display:inline-block;
