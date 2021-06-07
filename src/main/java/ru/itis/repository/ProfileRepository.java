@@ -7,4 +7,5 @@ import java.util.*;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Optional<Profile> findByUserId(Long userId);
+    List<Profile> findAllByUserIdIn(Iterable<Long> userIds);
 }

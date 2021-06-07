@@ -8,6 +8,7 @@ import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.model.*;
 import ru.itis.repository.*;
+import ru.itis.services.*;
 
 import java.util.*;
 
@@ -20,13 +21,19 @@ public class ProfileController {
     @Autowired
     private ProfileRepository profileRepository;
 
+    @Autowired
+    private ChatService chatService;
+
     @GetMapping("/profile")
     public String getProfilePage(Model model, Authentication authentication) {
-        Optional<User> user = userRepository.findByEmail(authentication.getName());
-        if (user.isPresent()) {
-			  Optional<Profile> profile = profileRepository.findByUserId(user.get().getId());
+        Optional<User> userResult = userRepository.findByEmail(authentication.getName());
+        if (userResult.isPresent()) {
+        	var user = userResult.get();
+			  Optional<Profile> profile = profileRepository.findByUserId(user.getId());
 			  model.addAttribute("profile", profile.orElse(null));
-			  model.addAttribute("user", user.orElse(null));
+			  model.addAttribute("user", user);
+
+			  model.addAttribute("chat_users", chatService.getRecipients(user.getId()));
 		  }
 
         return "profile";

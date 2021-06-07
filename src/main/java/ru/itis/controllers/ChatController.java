@@ -30,4 +30,9 @@ public class ChatController {
 			"/messages",
 			message);
 	}
+
+	@GetMapping("users/{user-id}")
+	public @ResponseBody ChatUserDto getUser(@PathVariable("user-id") Long userId) {
+		return chatService.getUser(userId);
+	}
 }
