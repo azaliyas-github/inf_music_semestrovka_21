@@ -1,3 +1,5 @@
+const moderatorsGroupId = "moderators";
+
 $(function() {
 	const chatWindow = $(".chat-window");
 	const sockJsClient = new SockJS("/chat");
@@ -29,6 +31,8 @@ $(function() {
 
 	function addStompMessage(stompMessage) {
 		const message = JSON.parse(stompMessage.body);
+		message.senderId = parseInt(message.senderId, 10);
+		message.recipientId = parseInt(message.recipientId, 10);
 		addMessage(message);
 	}
 	function showChat() {
@@ -48,17 +52,18 @@ $(function() {
 	const selectedRecipientName = $("#selected-recipient-name");
 	const selectedRecipientPhoto = $("#selected-recipient-photo");
 	const baseImageSrc = selectedRecipientPhoto.attr("basesrc");
-	$(".recipient-selector").click(function() {
-		const selectedRecipientId = $(this).find("input.user-id").val();
-		$.get("/chat/users/" + selectedRecipientId,
-			function(recipient) {
-				selectedRecipient = recipient;
+	if (isModerator)
+		$(".recipient-selector").click(function() {
+			const selectedRecipientId = $(this).find("input.user-id").val();
+			$.get("/chat/users/" + selectedRecipientId,
+				function(recipient) {
+					selectedRecipient = recipient;
 
-				selectedRecipientName.html(recipient.fullName);
-				selectedRecipientPhoto.attr("src", baseImageSrc + recipient.photoFileName);
-				chatWindow.addClass("recipient-selected");
-			});
-	});
+					selectedRecipientName.html(recipient.fullName);
+					selectedRecipientPhoto.attr("src", baseImageSrc + recipient.photoFileName);
+					chatWindow.addClass("recipient-selected");
+				});
+		});
 
 	const messageContent = $(".message-content");
 	$(".send-button").click(function(event) {
@@ -66,7 +71,7 @@ $(function() {
 
 		const message = {
 			senderId: currentUserId,
-			recipientId: selectedRecipient.id,
+			recipientId: isModerator ? selectedRecipient.id : moderatorsGroupId,
 			content: messageContent.val()
 		};
 		stompClient.send("/chat/send", {}, JSON.stringify(message));

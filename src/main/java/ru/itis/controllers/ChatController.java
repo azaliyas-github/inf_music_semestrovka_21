@@ -22,11 +22,11 @@ public class ChatController {
 		message = chatService.saveMessage(message);
 
 		messagingTemplate.convertAndSendToUser(
-			message.getSenderId().toString(),
+			message.getSenderId(),
 			"/messages",
 			message);
 		messagingTemplate.convertAndSendToUser(
-			message.getRecipientId().toString(),
+			message.getRecipientId(),
 			"/messages",
 			message);
 	}

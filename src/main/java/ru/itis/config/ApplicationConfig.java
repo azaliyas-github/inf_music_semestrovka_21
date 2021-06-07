@@ -7,12 +7,18 @@ import org.springframework.security.crypto.password.*;
 import org.springframework.web.servlet.config.annotation.*;
 import ru.itis.controllers.interceptors.*;
 
+import java.util.*;
 import java.util.concurrent.*;
 
 @Configuration
 public class ApplicationConfig implements WebMvcConfigurer {
     @Autowired
     private AuthInterceptor authInterceptor;
+
+    @Bean
+    public Random random() {
+    	return new Random();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
