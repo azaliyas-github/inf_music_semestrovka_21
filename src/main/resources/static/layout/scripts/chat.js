@@ -7,11 +7,19 @@ $(function() {
 
 	const chat = chatWindow.find("#chat");
 	const messagePrototype = chat.find("li.prototype");
+	function getCounterpartyId(message) {
+		return message.senderId === currentUserId ? message.recipientId : message.senderId;
+	}
 	function isMessageInChatWithSelectedRecipient(counterpartyId) {
 		return !isModerator || counterpartyId === selectedRecipient?.id;
 	}
 	function addMessage(message) {
-		const counterpartyId = message.senderId === currentUserId ? message.recipientId : message.senderId;
+		const counterpartyId = getCounterpartyId(message);
+		addRecipientById(counterpartyId);
+		showMessage(message);
+	}
+	function showMessage(message) {
+		const counterpartyId = getCounterpartyId(message);
 		if (!isMessageInChatWithSelectedRecipient(counterpartyId))
 			return;
 
@@ -67,6 +75,10 @@ $(function() {
 				function(usersResponse) {
 					usersResponse.forEach(addRecipient);
 				});
+	}
+	function addRecipientById(userId) {
+		if (isModerator && !userCache.has(parseInt(userId, 10)))
+			$.get("/chat/users/" + userId, addRecipient);
 	}
 
 	function addStompMessage(stompMessage) {
