@@ -45,7 +45,11 @@
                         Sign in
                     </a>
                     <#else>
-                    <a href="/profile">Profile</a>
+                        <#if currentUrl != "/profile">
+                            <a href="/profile">Profile</a>
+                        <#else>
+                            <a href="/auth/logout">Log out</a>
+                        </#if>
                     </#if>
                 </li>
             </ul>
