@@ -6,6 +6,7 @@ import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
 import ru.itis.model.*;
 import ru.itis.repository.*;
 
@@ -13,6 +14,7 @@ import java.util.*;
 
 @Controller
 @PreAuthorize("isAuthenticated()")
+@RequestMapping("/profile")
 public class ProfileController {
     @Autowired
     private UserRepository userRepository;
@@ -20,7 +22,10 @@ public class ProfileController {
     @Autowired
     private ProfileRepository profileRepository;
 
-    @GetMapping("/profile")
+    @Autowired
+    private ImageRepository imageRepository;
+
+    @GetMapping
     public String getProfilePage(Model model, Authentication authentication) {
         Optional<User> user = userRepository.findByEmail(authentication.getName());
         if (user.isPresent()) {
