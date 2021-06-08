@@ -10,4 +10,5 @@ import java.util.*;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     Optional<User> findByConfirmCode(String confirmCode);
+    List<User> findAllByRole(User.Role role);
 }

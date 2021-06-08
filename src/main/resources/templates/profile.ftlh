@@ -1,9 +1,11 @@
 <#include "base/layout.ftlh">
+<#import "chat.ftlh" as chat>
 <#macro title>Profile</#macro>
 
 <#macro head>
     <link href="/layout/styles/profile.css" rel="stylesheet" type="text/css">
     <script src="/layout/scripts/profile.js"></script>
+    <@chat.links/>
 </#macro>
 
 <#macro custom_header>
@@ -43,6 +45,7 @@
             </form>
         </div>
     </#if>
+    <@chat.content user/>
 </#macro>
 
 <@display_page/>
