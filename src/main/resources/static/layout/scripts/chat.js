@@ -7,6 +7,7 @@ $(function() {
 
 	const chat = chatWindow.find("#chat");
 	const messagePrototype = chat.find("li.prototype");
+	const messageCache = new Map();
 	function getCounterpartyId(message) {
 		return message.senderId === currentUserId ? message.recipientId : message.senderId;
 	}
@@ -15,8 +16,14 @@ $(function() {
 	}
 	function addMessage(message) {
 		const counterpartyId = getCounterpartyId(message);
+		cacheMessage(message, counterpartyId);
 		addRecipientById(counterpartyId);
 		showMessage(message);
+	}
+	function cacheMessage(message, userId) {
+		const cachedMessages = messageCache.get(userId) ?? [];
+		cachedMessages.push(message);
+		messageCache.set(userId, cachedMessages);
 	}
 	function showMessage(message) {
 		const counterpartyId = getCounterpartyId(message);
@@ -36,6 +43,12 @@ $(function() {
 
 		messageElement.appendTo(chat);
 	}
+	function restoreMessages(recipientId) {
+		chat.children().not(".prototype").remove();
+
+		const messages = messageCache.get(recipientId);
+		messages?.forEach(showMessage);
+	}
 
 	let selectedRecipient;
 	const selectedRecipientName = $("#selected-recipient-name");
@@ -50,6 +63,8 @@ $(function() {
 		selectedRecipientName.html(selectedRecipient.fullName);
 		selectedRecipientPhoto.attr("src", imageBaseUrl + selectedRecipient.photoFileName);
 		chatWindow.addClass("recipient-selected");
+
+		restoreMessages(userId);
 	}
 	function addRecipient(user) {
 		userCache.set(user.id, user);
