@@ -7,16 +7,34 @@ $(function() {
 
 	const chat = chatWindow.find("#chat");
 	const messagePrototype = chat.find("li.prototype");
-	function addMessageFromUs(message) {
-		addMessage(message, "me");
+	const messageCache = new Map();
+	function getCounterpartyId(message) {
+		return message.senderId === currentUserId ? message.recipientId : message.senderId;
 	}
-	function addMessageFromThem(message) {
-		addMessage(message, "you");
+	function isMessageInChatWithSelectedRecipient(counterpartyId) {
+		return !isModerator || counterpartyId === selectedRecipient?.id;
 	}
-	function addMessage(message, className) {
+	function addMessage(message) {
+		const counterpartyId = getCounterpartyId(message);
+		cacheMessage(message, counterpartyId);
+		addRecipientById(counterpartyId);
+		showMessage(message);
+	}
+	function cacheMessage(message, userId) {
+		const cachedMessages = messageCache.get(userId) ?? [];
+		cachedMessages.push(message);
+		messageCache.set(userId, cachedMessages);
+	}
+	function showMessage(message) {
+		const counterpartyId = getCounterpartyId(message);
+		if (!isMessageInChatWithSelectedRecipient(counterpartyId))
+			return;
+
+		const messageClassName = message.senderId === currentUserId ? "me" : "you";
+
 		const messageElement = messagePrototype.clone();
 		messageElement.removeClass("prototype");
-		messageElement.addClass(className);
+		messageElement.addClass(messageClassName);
 
 		messageElement.find(".author-name").text(message.senderName);
 		messageElement.find(".message").text(message.content);
@@ -24,6 +42,12 @@ $(function() {
 			new Date(message.creationTimestamp).toLocaleString());
 
 		messageElement.appendTo(chat);
+	}
+	function restoreMessages(recipientId) {
+		chat.children().not(".prototype").remove();
+
+		const messages = messageCache.get(recipientId);
+		messages?.forEach(showMessage);
 	}
 
 	let selectedRecipient;
@@ -34,14 +58,15 @@ $(function() {
 	const userCache = new Map();
 	const userList = $(".chat-window .users");
 	const userPrototype = userList.find("li.prototype");
-	function onClickOnUser() {
-		const userId = $(this).data("user-id");
+	function selectRecipient(userId) {
 		selectedRecipient = userCache.get(userId);
 		selectedRecipientName.html(selectedRecipient.fullName);
 		selectedRecipientPhoto.attr("src", imageBaseUrl + selectedRecipient.photoFileName);
 		chatWindow.addClass("recipient-selected");
+
+		restoreMessages(userId);
 	}
-	function addUser(user) {
+	function addRecipient(user) {
 		userCache.set(user.id, user);
 
 		const userElement = userPrototype.clone();
@@ -51,42 +76,45 @@ $(function() {
 		userElement.find(".user-name").text(user.fullName);
 		userElement.find(".profile-photo").attr("src", imageBaseUrl + user.photoFileName);
 
-		userElement.click(onClickOnUser);
+		userElement.click(function () {
+			const userId = $(this).data("user-id");
+			selectRecipient(userId);
+		});
 
 		userElement.prependTo(userList);
 	}
-	function fetchUserList() {
+	function fetchRecipients() {
 		if (isModerator)
 			$.get(
 				"/chat/users",
 				function(usersResponse) {
-					usersResponse.forEach(addUser);
+					usersResponse.forEach(addRecipient);
 				});
 	}
-	function fetchUser(userId) {
+	function addRecipientById(userId) {
 		if (isModerator && !userCache.has(parseInt(userId, 10)))
-			$.get("/chat/users/" + userId, addUser);
+			$.get("/chat/users/" + userId, addRecipient);
 	}
 
-	function onMessageReceived(stompMessage) {
+	function addStompMessage(stompMessage) {
 		const message = JSON.parse(stompMessage.body);
-		if (message.senderId === currentUserId)
-			addMessageFromUs(message);
-		else {
-			fetchUser(message.senderId);
-			addMessageFromThem(message);
-		}
+		message.senderId = parseInt(message.senderId, 10);
+		message.recipientId = parseInt(message.recipientId, 10);
+		addMessage(message);
 	}
-	function onStompClientConnected() {
-		stompClient.subscribe("/chat/users/" + currentUserId + "/messages", onMessageReceived);
-		fetchUserList();
-
+	function showChat() {
 		chatWindow.removeClass("not-connected");
 	}
-	function onStompClientConnectionError() {
+	function hideChat() {
 		chatWindow.addClass("not-connected");
 	}
-	stompClient.connect({}, onStompClientConnected, onStompClientConnectionError);
+	stompClient.connect({},
+		function() {
+			stompClient.subscribe("/chat/users/" + currentUserId + "/messages", addStompMessage);
+			fetchRecipients();
+			showChat();
+		},
+		hideChat);
 
 	const messageContent = $(".message-content");
 	$(".send-button").click(function(event) {

@@ -8,7 +8,7 @@
 <#macro content current_user>
 	<script>
 		const isModerator = ${authorities?seq_contains("MODERATOR")?c};
-		const currentUserId = "${current_user.id}";
+		const currentUserId = ${current_user.id};
 	</script>
 	<#assign recipientSelectedClass>
 		 ${authorities?seq_contains("MODERATOR")?then("", " recipient-selected")}
